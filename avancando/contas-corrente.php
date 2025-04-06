@@ -21,5 +21,5 @@ $conta3 = [
 $contasCorrentes = [$conta1, $conta2, $conta3];
 
 foreach ($contasCorrentes as  $contaCorrente) {
-    echo $contaCorrente;
+    echo $contaCorrente['Saldo'];
 }
