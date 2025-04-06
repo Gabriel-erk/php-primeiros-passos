@@ -1,5 +1,6 @@
 <?php
 
+// isso no caso é uma subRotina é quando não se retorna um valor
 function sacar($valor_saque, $contas){
     foreach ($contas as $conta) {
         if ($conta['Saldo'] < $valor_saque) {
