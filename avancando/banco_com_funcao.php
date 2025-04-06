@@ -1,6 +1,7 @@
 <?php
 
-function sacar($conta, $valor_a_sacar){
+function sacar(array $conta, float $valor_a_sacar) : array 
+{
     if ($conta['Saldo'] < $valor_a_sacar) {
         echo "Você não pode sacar, valor insuficiente." . PHP_EOL;
     } else {
