@@ -21,5 +21,5 @@ $array_associativo_nomes_idades = cria_array_associativo(['joao', 'pedro', 'henr
 
 foreach ($array_associativo_nomes_idades as $key => $value) {
     echo "Nome: $key" . PHP_EOL;
-    echo "Idade: " . $value['idade'] . PHP_EOL;
+    echo "Idade: {$value['idade']}" . PHP_EOL;
 }

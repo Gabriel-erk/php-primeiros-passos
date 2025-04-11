@@ -26,5 +26,5 @@ $produtos = [
 ];
 
 foreach ($produtos as $produto) {
-    echo "Produto: " . $produto['Nome'] . " - " . "Preço: R$" . number_format($produto['Preço'], 2, ',', '.') . PHP_EOL;
+    echo "Produto: {$produto['Nome']} - Preço: R$" . number_format($produto['Preço'], 2, ',', '.') . PHP_EOL;
 }
