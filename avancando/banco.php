@@ -48,5 +48,9 @@ $contasCorrentes['123.241.453.83'] = sacar($contasCorrentes['123.241.453.83'], 5
 $contasCorrentes['123.241.453.83'] = depositar($contasCorrentes['123.241.453.83'], 20);
 
 foreach ($contasCorrentes as $cpf => $conta) {
+    /* 
+    * intituladas de string complexas, não por serem complexas, mas por nos permitirem utilizar dados complexos em strings, sem precisar ficar concatenando (vulgo interpolação), podemos chamar um array associativo em uma string, com essa interpolação, onde apenas envolveremos o "dado complexo" entre chaves
+    * outra forma de fazer isso, seria assim "$cpf $conta[titular] $conta [Saldo]" que também daria certo, onde você remove os aspas das chaves 'titular' e 'saldo', é uma forma também, maas, eu prefiro usar da forma com {} mesmo pois permite maior organização e padronização do código, pelo menos pra mim ficaria mais legível
+    */
     echo "$cpf {$conta['Titular']} {$conta['Saldo']}" . PHP_EOL;
 }
