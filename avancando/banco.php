@@ -1,28 +1,25 @@
 <?php
-function sacar(array $conta, float $valor_a_sacar) : array
-{
-    if ($conta['Saldo'] < $valor_a_sacar) {
-        echo "Você não pode sacar, valor insuficiente." . PHP_EOL;
-    } else {
-        $conta['Saldo'] -= $valor_a_sacar;
-    }
-    return $conta;
-}
 
-// especificando que o valor do primeiro parâmetro é array
-// especificando que o valor do parâmetro que vai guardar o depósito tem que ser do tipo float, fazendo com que o erro seja mostrado nessa linha no terminal ao tentar passar outro argumento - valores inteiros são aceitos aqui também (mais explicações na tabela de conversões na doc do php) porém o contrário não funcionaria
-// após os : específico o tipo do retorno da minha função
-function depositar(array $conta, float $valor_a_depositar) : array
-{
-    if ($valor_a_depositar > 0) {
-        $conta['Saldo'] += $valor_a_depositar;
-    } else {
-        echo "Digite um valor válido para saque." . PHP_EOL;
-    }
+/*
+* require once vai trazer outro arquivo para este aqui (no caso, funcoes.php), por debaixo dos panos é como se o conteúdo do arquivo funcoes.php estivesse sido colado aqui 
+* require diz que ele é essencial para o programa, então, caso não o encontre, retorna um fatal error e impede a execução do restante do programa
 
-    /* retornando a conta ao invés do valor (nesse caso retornando todas as chaves, saldo, titular....) - caso não retorne nada, o a linha: $contasCorrentes['123.241.453.83'] = depositar($contasCorrentes['123.241.453.83'], -70); retornará nulo, pois a chave com esse cpf recebera um valor nulo, já que nada foi retornado para ela */
-    return $conta;
-}
+* once diz que, ele vai verificar se o arquivo já foi importado para cá, então caso tenha o seguinte:  linha 1 - require_once 'funcoes.php'; e na linha 2 - require_once 'funcoes.php'; por conta do once ele irá verificar que o arquivo JÁ foi incluido, e seguirá normalmente, sem interromper a execução, dar um aviso ou erro
+*/
+// require_once 'funcoes.php';
+
+/*
+* outra forma de trazer um arquivo 
+! require 'funcoes.php';
+* porém desta forma, caso aconteça de: linha 1 - require 'funcoes.php'; e na linha 2 - require 'funcoes.php'; - será como se estivesse colando o conteúdo do código funcoes.php 2 vezes, tentando sobrescrever a função, o que não dará certo, e retornará um fatal erro
+*/ 
+
+/*
+* outra forma de trazer um arquivo 
+! include 'funcoes.php';
+* desta forma diz que o arquivo funcoes.php não é essencial, e não será necessário parar a execução do programa caso ele não seja encontrado, então, ele retornará apenas um warning e continuará a execução (onde obviamente não fará o esperado)
+* porém desta forma, caso aconteça de: linha 1 - include 'funcoes.php'; e na linha 2 - require 'funcoes.php'; - será como se estivesse colando o conteúdo do código funcoes.php 2 vezes, tentando sobrescrever a função, o que não dará certo, e retornará um fatal erro
+*/ 
 
 $contasCorrentes = [
     '123.445.123-98' => [
