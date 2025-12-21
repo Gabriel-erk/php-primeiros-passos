@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 echo "Bem-vindo(a) ao Screen Match!" . PHP_EOL;
 $nomeFilme = "Top Gun - Maverick";
@@ -13,4 +13,10 @@ $incluidoNoPlano = $planoPrime || $anoLancamento < 2020;
 echo $nomeFilme . PHP_EOL;
 echo "Lançado em: ($anoLancamento) - Nota: $notaFilme" . PHP_EOL;
 
-?>
+if ($anoLancamento > 2022) {
+    echo "Esse filme é um lançamento.";
+} elseif ($anoLancamento > 2020 and $anoLancamento <= 2022) {
+    echo "Esse filme ainda é novo.";
+} else {
+    echo "Esse filme não é um lançamento.";
+}
