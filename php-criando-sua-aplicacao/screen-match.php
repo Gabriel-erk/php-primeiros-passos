@@ -5,8 +5,16 @@ $nomeFilme = "Se beber, não case!";
 $nomeFilme = "Thor: Ragnarok";
 $nomeFilme = "Top Gun - Maverick";
 // argv é um array especial do php que guarda os argumentos passados via linha de comando (TERMINAL), separados por espaço, ou seja, ao digitar "php screen-match.php 2022", o valor 2022 estará em $argv[1] e o valor $argv[0] será o nome do arquivo "screen-match.php"
-$anoLancamento = $argv[1] ?? 2022; // se não for passado nenhum argumento (ou seja, se for nulo), o ano de lançamento será 2022
-$notaFilme = (9 + 10 + 9 + 8 + 10) / 5;
+$anoLancamento = 2022; // se não for passado nenhum argumento (ou seja, se for nulo), o ano de lançamento será 2022
+
+$quantidadeDeNotas = $argc - 1; // o valor de argc é a quantidade de argumentos passados via linha de comando (TERMINAL), incluindo o nome do arquivo, por isso subtraímos 1 para obter a quantidade real de notas (para não incluir o nome do arquivo na contagem)
+$somaDeNotas = 0;
+
+for ($i=1; $i < $argc; $i++) { 
+    $somaDeNotas += $argv[$i];
+}
+
+$notaFilme = $somaDeNotas / $quantidadeDeNotas;
 
 $planoPrime = true;
 // se uma das condições forem verdadeiras, a váriavel $incluidoNoPlano será verdadeira (true), caso contrário, será falsa (false)
