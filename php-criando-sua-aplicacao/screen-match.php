@@ -1,5 +1,16 @@
 <?php
 
+function exibeMensagemLancamento($ano)
+{
+    if ($ano > 2022) {
+        echo "Esse filme é um lançamento.";
+    } elseif ($ano > 2020 and $ano <= 2022) {
+        echo "Esse filme ainda é novo." . PHP_EOL;
+    } else {
+        echo "Esse filme não é um lançamento." . PHP_EOL;
+    }
+}
+
 echo "Bem-vindo(a) ao Screen Match!" . PHP_EOL;
 $escolhaDoUsuario = (int) readline("Digite o número do filme (0 a 2): ");
 
@@ -46,13 +57,7 @@ $incluidoNoPlano = $planoPrime || $anoLancamento < 2020;
 echo $filmes[$escolhaDoUsuario]["nome"] . PHP_EOL;
 echo "Lançado em: " . $anoLancamento . " - Nota: $notaFilme" . PHP_EOL;
 
-if ($anoLancamento > 2022) {
-    echo "Esse filme é um lançamento.";
-} elseif ($anoLancamento > 2020 and $anoLancamento <= 2022) {
-    echo "Esse filme ainda é novo." . PHP_EOL;
-} else {
-    echo "Esse filme não é um lançamento." . PHP_EOL;
-}
+exibeMensagemLancamento($anoLancamento);
 
 // match realiza uma comparação estrita (===) entre o valor da variável e os valores definidos em cada case, caso encontre um valor correspondente, ou seja, caso o valor passado como parâemetro seja igual a um dos valores definidos, o bloco de código correspondente será executado(se $nomeFilme passado nos parênteses de match for igual a um dos cases dele, como por exemplo, um dos cases dentro do bloco de código do nosso match é "Se beber, não case!" e se o valor de $nomeFilme for igual a "Se beber, não case!" ele vai retornar o valor "comédia" para a váriavel $genero), retornando o valor associado a esse case. Se nenhum valor corresponder, o bloco default será executado, retornando o valor associado a ele.
 $genero =  match ($filmes[$escolhaDoUsuario]["nome"]) {
