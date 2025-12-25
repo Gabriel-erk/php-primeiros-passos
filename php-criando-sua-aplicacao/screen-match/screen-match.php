@@ -1,24 +1,13 @@
 <?php
-// subrotina que não retorna nada, apenas exibe uma mensagem na tela, por isso o tipo de retorno é void (vazio) que significa a ausência de retorno de qualquer tipo
-function exibeMensagemLancamento(int $ano): void
-{
-    if ($ano > 2022) {
-        echo "Esse filme é um lançamento.";
-    } elseif ($ano > 2020 and $ano <= 2022) {
-        echo "Esse filme ainda é novo." . PHP_EOL;
-    } else {
-        echo "Esse filme não é um lançamento." . PHP_EOL;
-    }
-}
-
-// definindo a função incluidoNoPlano que recebe dois parâmetros: um booleano $planoPrime e um inteiro $anoLancamento para facilitar o tratamento da lógica de inclusão no plano e não permitir que valores diferentes desses tipos sejam passados para a função, caso passe, o php irá avisar um erro de tipo de váriavel (ou em alguns casos, ele pode tentar converter o valor passado para o tipo esperado, mas isso não é garantido)
-// fazendo isso adicionamos robustez ao código, protegendo contra erros humanos, pois eu, ou alguém que esteja mexendo no código, pode acabar passando um valor errado para a função, como uma string ou um array, o que poderia causar comportamentos inesperados ou erros em tempo de execução
-// para melhorar mais ainda, podemos definir o tipo de retorno da função como booleano, utilizando ": bool" após os parênteses dos parâmetros, assim garantimos que a função sempre retornará um valor booleano (true ou false), caso contrário, o PHP irá avisar um erro de tipo de retorno
-function incluidoNoPlano(bool $planoPrime, int $anoLancamento): bool
-{
-    // return quer dizer: devolva o resultado dessa expressão para quem te chamou, lá abaixo eu chamo essa função na váriavel $incluido no plano, e ela irá me retornar o resultado da operação lógica utilizando os valores que eu passar como argumentos para a função
-    return $planoPrime || $anoLancamento < 2020;
-}
+//  mesmo executando este arquivo fora da pasta que ele está, o require_once irá encontrar o arquivo funcoes.php corretamente, graças ao uso do caminho relativo e devido ao fato que o require_once sempre busca primeiro na pasta do arquivo que está sendo executado
+/*
+* caminho absoluto exemplo: /var/www/html/php-criando-sua-aplicacao/screen-match/funcoes.php, é onde o arquivo se localiza em nossa maquina, assim, manipulando para que o php sempre busque esse arquivo nesse local específico, independente de onde o arquivo que está fazendo o require_once esteja
+* caminho relativo exemplo: __DIR__ . '/funcoes.php', onde __DIR__ é uma constante mágica do PHP que representa o diretório atual do arquivo que está sendo executado, ou seja, ele sempre aponta para a pasta onde o arquivo screen-match.php está localizado, assim, mesmo que eu execute o arquivo screen-match.php de outro local, o require_once irá buscar o arquivo funcoes.php na pasta correta, que é a mesma pasta onde o screen-match.php está localizado
+* utilizo o ponto de concatenação (.) para juntar a constante mágica __DIR__ com a string '/funcoes.php', formando o caminho completo para o arquivo funcoes.php, utilizo a barra por questão de sintaxe, para facilitar a concatenação dos dois valores e garantir que o caminho esteja correto, independente do sistema operacional (Windows, Linux, etc.)
+* resumindo, o __DIR__ traz a pasta do nosso arquivo atual (screen-match.php) e eu junto com a string '/funcoes.php' para formar o caminho completo do arquivo que quero incluir, garantindo que o require_once sempre encontre o arquivo funcoes.php corretamente
+* estou dizendo que eu quero que ele ache esse arquivo "funcoes.php" a partir da pasta que estou execuntando meu script "screen-match.php" (arquivo que chamo o require_once)
+*/ 
+require_once __DIR__ . '/funcoes.php';
 
 echo "Bem-vindo(a) ao Screen Match!" . PHP_EOL;
 $escolhaDoUsuario = (int) readline("Digite o número do filme (0 a 2): ");
