@@ -7,7 +7,7 @@
 * resumindo, o __DIR__ traz a pasta do nosso arquivo atual (screen-match.php) e eu junto com a string '/funcoes.php' para formar o caminho completo do arquivo que quero incluir, garantindo que o require_once sempre encontre o arquivo funcoes.php corretamente
 * estou dizendo que eu quero que ele ache esse arquivo "funcoes.php" a partir da pasta que estou execuntando meu script "screen-match.php" (arquivo que chamo o require_once)
 */
-require_once __DIR__ . '/funcoes.php';
+require_once __DIR__ . '/src/funcoes.php';
 
 echo "Bem-vindo(a) ao Screen Match!" . PHP_EOL;
 $escolhaDoUsuario = (int) readline("Digite o número do filme (0 a 2): ");
