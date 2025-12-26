@@ -6,7 +6,7 @@
 * utilizo o ponto de concatenação (.) para juntar a constante mágica __DIR__ com a string '/funcoes.php', formando o caminho completo para o arquivo funcoes.php, utilizo a barra por questão de sintaxe, para facilitar a concatenação dos dois valores e garantir que o caminho esteja correto, independente do sistema operacional (Windows, Linux, etc.)
 * resumindo, o __DIR__ traz a pasta do nosso arquivo atual (screen-match.php) e eu junto com a string '/funcoes.php' para formar o caminho completo do arquivo que quero incluir, garantindo que o require_once sempre encontre o arquivo funcoes.php corretamente
 * estou dizendo que eu quero que ele ache esse arquivo "funcoes.php" a partir da pasta que estou execuntando meu script "screen-match.php" (arquivo que chamo o require_once)
-*/
+*/ 
 require_once __DIR__ . '/funcoes.php';
 
 echo "Bem-vindo(a) ao Screen Match!" . PHP_EOL;
@@ -66,7 +66,14 @@ $genero =  match ($filmes[$escolhaDoUsuario]["nome"]) {
 };
 
 echo "O gênero do filme é: $genero" . PHP_EOL;
-$filmesComoStringJson = json_encode($filmes);
+//conceitos abaixo: json_encode e json_decode 
 
-// gravo o conteúdo JSON em um arquivo chamado filmes.json, utilizando a função file_put_contents, que recebe como primeiro parâmetro o caminho do arquivo (utilizando __DIR__ para garantir que o arquivo será criado na mesma pasta do script atual(MESMA PASTA DE SCREEN-MATCH)) e como segundo parâmetro o conteúdo a ser gravado (a string JSON gerada anteriormente)
-file_put_contents(__DIR__ . '/filmes.json', $filmesComoStringJson);
+// pega uma váriavel/valor/array em php e *converte para o formato JSON* (JavaScript Object Notation), que é um formato leve de troca de dados, fácil de ler e escrever para humanos, e fácil de analisar e gerar para máquinas
+// json é ótimo para o front end pois já tem um formato amigável com o js
+// as chaves do meu array associativo virarão chaves em json e os valores virarão valores em json
+json_encode($filmes);
+// colando o resultado dessa conversão em um console do navegador por exemplo, eu poderia ver que ele seria interpretado como um objeto javascript
+echo "JSON: " . json_encode($filmes) . PHP_EOL;
+
+// pega uma string no formato JSON e *converte para o formato PHP*, ou seja, transforma a string JSON em um array associativo ou objeto PHP, dependendo do segundo parâmetro passado para a função json_decode, como passei true, será convertido para um array associativo
+var_dump(json_decode('[{"nome":"Se beber, n\u00e3o case!","anoLancamento":2011},{"nome":"Thor: Ragnarok","anoLancamento":2017},{"nome":"Top Gun - Maverick","anoLancamento":2022}]', true));
