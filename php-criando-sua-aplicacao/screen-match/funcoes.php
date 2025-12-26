@@ -19,3 +19,14 @@ function incluidoNoPlano(bool $planoPrime, int $anoLancamento): bool
     // return quer dizer: devolva o resultado dessa expressão para quem te chamou, lá abaixo eu chamo essa função na váriavel $incluido no plano, e ela irá me retornar o resultado da operação lógica utilizando os valores que eu passar como argumentos para a função
     return $planoPrime || $anoLancamento < 2020;
 }
+
+// função construtora, para evitar que, ao criar um filme o usuário deixe passar alguma informação/não preencha os atributos do meu filme da forma correta
+// função que define todos os parâmetros para a estrutura no meu return
+ function criaFilme(string $nome, int $anoLancamento, float $nota, string $genero): array{
+    return [
+        'nome' => $nome,
+        'anoLancamento' => $anoLancamento,
+        'nota' => $nota,
+        'genero' => $genero,
+    ];
+ }

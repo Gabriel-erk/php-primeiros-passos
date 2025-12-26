@@ -70,3 +70,10 @@ $filmesComoStringJson = json_encode($filmes);
 
 // gravo o conteúdo JSON em um arquivo chamado filmes.json, utilizando a função file_put_contents, que recebe como primeiro parâmetro o caminho do arquivo (utilizando __DIR__ para garantir que o arquivo será criado na mesma pasta do script atual(MESMA PASTA DE SCREEN-MATCH)) e como segundo parâmetro o conteúdo a ser gravado (a string JSON gerada anteriormente)
 file_put_contents(__DIR__ . '/filmes.json', $filmesComoStringJson);
+
+$novoFilme = criaFilme("Festa da Salsicha", 2018, 8.0, "Comédia");
+// outra forma de criar um filme , ignorando a ordem dos parâmetros, onde, por ex, na linha acima eu sigo a ordem, passo o nome do filme primeiro pois ele é o primeiro parâmetro da minha função construtora, porém, fazendo da forma abaixo, especificando o nome do atributo, posso passa-lo em qualquer posição dentro dos parênteses abaixo
+// também utilizado quando temos parâmetros opcionais e queremos passar apenas 1 ou 2
+$novoFilme2 = criaFilme(anoLancamento: 2020, nome: "365 dias", genero: "Foda demais", nota:  10.0);
+
+print_r($novoFilme);
