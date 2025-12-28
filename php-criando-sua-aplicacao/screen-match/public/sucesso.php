@@ -1,0 +1,5 @@
+<!-- consigo utilizar código php aqui dentro da abertura e fechamento php por conta do arquivo ter a extensão ".php"  -->
+<!-- tudo dentro das tags de abertura e fechamento de comandos php será EXECUTADO e tudo fora, será exibido como html -->
+<!-- dentro das tags de abertura e fechamento de comandos php abaixo estou exibindo o valor da superglobal $_GET no campo "filme", que só existe devido a sua definição e atribuição de valor no arquivo "exporta-arquivo.php", que faz, nada mais e nada menos que, no final do arquivo redirecionar o usuário para esta página aqui passando o nome do filme como parâmetro na sua URL -->
+ <!-- preciso do "echo" pois não tem como eu exibir na tela algo apenas com $_GET['filme'], mesmo estando dentro de uma tag html que faça isso, que exiba conteúdo, ainda é necessário o echo para exibir informações php dentro de tags htmlç -->
+<h1>Sucesso! Filme <?php echo $_GET['filme'] ?> inserido.</h1>
