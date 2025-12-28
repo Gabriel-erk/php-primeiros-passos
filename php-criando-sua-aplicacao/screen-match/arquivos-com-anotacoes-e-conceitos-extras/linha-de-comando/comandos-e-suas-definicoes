@@ -1,0 +1,3 @@
+// iniciando um servidor de desenvolvimento php, utilizando o endereço de rede do meu próprio computador (localhost), na porta 8001 (é necessário passar uma porta para abrir um servidor, e é provável que esta (80001) esteja aberta e não tenha nenhum outro programa a usando)
+// -t = target, ou seja, meu alvo por assim dizer, quero que mande tudo para a pasta public (quando chegar requisições, quero que vá para lá)
+php -S localhost:8001 -t public
