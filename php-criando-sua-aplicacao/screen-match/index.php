@@ -1,6 +1,7 @@
 <?php
 // requisitando a classe Filme.php (definida como uma classe de modelo/estrutura/esqueleto para meus filmes, pois depois de criar um objeto a partir dela, eles tomam a sua "própria forma", com seus próprios valores)
 require_once __DIR__ . '/src/Model/Filme.php';
+require_once __DIR__ . '/src/Model/Serie.php';
 //  mesmo executando este arquivo fora da pasta que ele está, o require_once irá encontrar o arquivo funcoes.php corretamente, graças ao uso do caminho relativo e devido ao fato que o require_once sempre busca primeiro na pasta do arquivo que está sendo executado
 /*
 * caminho absoluto exemplo: /var/www/html/php-criando-sua-aplicacao/screen-match/funcoes.php, é onde o arquivo se localiza em nossa maquina, assim, manipulando para que o php sempre busque esse arquivo nesse local específico, independente de onde o arquivo que está fazendo o require_once esteja
@@ -80,4 +81,7 @@ $novoFilme2 = criaFilme(anoLancamento: 2020, nome: "365 dias", genero: "Foda dem
 
 // como não é mais array associativo, não se mostra mais necessário a utilização de [] para exibir um atributo da coleção, aqui, apenas utilizamos "$objetoInstanciadoDeAlgumaClasse->nomeDoAtributo;"
 echo $novoFilme->nome . PHP_EOL;
-echo $novoFilme->anoLancamento;
+echo $novoFilme->anoLancamento . PHP_EOL;
+
+$serie = criaSerie("Arcane", 9,20.5, true);
+var_dump($serie);

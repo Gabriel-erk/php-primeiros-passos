@@ -33,6 +33,17 @@ function incluidoNoPlano(bool $planoPrime, int $anoLancamento): bool
     $filme->anoLancamento = $anoLancamento;
     $filme->nota = $nota;
     $filme->genero = $genero;
-    
+
     return $filme;
  }
+
+ function criaSerie(string $nomeSerie, int $qntdEpisodios, float $duracaoPorEpisodio, bool $possuiLegenda): Serie{
+    $serie = new Serie();
+
+    $serie->nome = $nomeSerie;
+    $serie->qntdEpisodios = $qntdEpisodios;
+    $serie->duracaoPorEpisodio = $duracaoPorEpisodio;
+    $serie->possuiLegenda = $possuiLegenda;
+
+    return $serie;
+}
