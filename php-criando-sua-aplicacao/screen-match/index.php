@@ -1,4 +1,6 @@
 <?php
+// requisitando a classe Filme.php (definida como uma classe de modelo/estrutura/esqueleto para meus filmes, pois depois de criar um objeto a partir dela, eles tomam a sua "própria forma", com seus próprios valores)
+require_once __DIR__ . '/src/Model/Filme.php';
 //  mesmo executando este arquivo fora da pasta que ele está, o require_once irá encontrar o arquivo funcoes.php corretamente, graças ao uso do caminho relativo e devido ao fato que o require_once sempre busca primeiro na pasta do arquivo que está sendo executado
 /*
 * caminho absoluto exemplo: /var/www/html/php-criando-sua-aplicacao/screen-match/funcoes.php, é onde o arquivo se localiza em nossa maquina, assim, manipulando para que o php sempre busque esse arquivo nesse local específico, independente de onde o arquivo que está fazendo o require_once esteja
@@ -71,9 +73,11 @@ $filmesComoStringJson = json_encode($filmes);
 // gravo o conteúdo JSON em um arquivo chamado filmes.json, utilizando a função file_put_contents, que recebe como primeiro parâmetro o caminho do arquivo (utilizando __DIR__ para garantir que o arquivo será criado na mesma pasta do script atual(MESMA PASTA DE SCREEN-MATCH)) e como segundo parâmetro o conteúdo a ser gravado (a string JSON gerada anteriormente)
 file_put_contents(__DIR__ . '/filmes.json', $filmesComoStringJson);
 
-$novoFilme = criaFilme("Festa da Salsicha", 2018, 8.0, "Comédia");
+$novoFilme = criaFilme("Festa da Salsicha", 2018, "Comédia", 8.0);
 // outra forma de criar um filme , ignorando a ordem dos parâmetros, onde, por ex, na linha acima eu sigo a ordem, passo o nome do filme primeiro pois ele é o primeiro parâmetro da minha função construtora, porém, fazendo da forma abaixo, especificando o nome do atributo, posso passa-lo em qualquer posição dentro dos parênteses abaixo
 // também utilizado quando temos parâmetros opcionais e queremos passar apenas 1 ou 2
 $novoFilme2 = criaFilme(anoLancamento: 2020, nome: "365 dias", genero: "Foda demais", nota:  10.0);
 
-print_r($novoFilme);
+// como não é mais array associativo, não se mostra mais necessário a utilização de [] para exibir um atributo da coleção, aqui, apenas utilizamos "$objetoInstanciadoDeAlgumaClasse->nomeDoAtributo;"
+echo $novoFilme->nome . PHP_EOL;
+echo $novoFilme->anoLancamento;

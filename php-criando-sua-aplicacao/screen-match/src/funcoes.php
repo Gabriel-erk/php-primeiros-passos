@@ -1,4 +1,5 @@
 <?php
+
 // subrotina que não retorna nada, apenas exibe uma mensagem na tela, por isso o tipo de retorno é void (vazio) que significa a ausência de retorno de qualquer tipo
 function exibeMensagemLancamento(int $ano): void
 {
@@ -22,11 +23,16 @@ function incluidoNoPlano(bool $planoPrime, int $anoLancamento): bool
 
 // função construtora, para evitar que, ao criar um filme o usuário deixe passar alguma informação/não preencha os atributos do meu filme da forma correta
 // função que define todos os parâmetros para a estrutura no meu return
- function criaFilme(string $nome, int $anoLancamento, float $nota, string $genero): array{
-    return [
-        'nome' => $nome,
-        'anoLancamento' => $anoLancamento,
-        'nota' => $nota,
-        'genero' => $genero,
-    ];
+// defini que o retorno da minha função é um objeto do tipo Filme, sempre tem que retornar algo com o tipo "Filme", que é definido na minha pasta de "Model/Modelo" e lá instancio minha classe filme (onde, com esse comportamento de classe, me dá um maior controle sobre seus atributos e comportamentos do que simplesmente deixa-lo jogado pelos arquivos/nos arquivos de execução, fora que é melhor para controlar os tipos do filme)
+ function criaFilme(string $nome, int $anoLancamento, string $genero, float $nota,): Filme {
+    // palavra reservada "new" é utilizada toda vez que quero instânciar um novo objeto do tipo da minha classe (aqui, do tipo filme)
+    $filme = new Filme();
+    // minha classe possui os atributos: nome, anoLancamento, nota e genero
+    // logo abaixo acesso cada atributo da minha classe filme (através da "->" e o objeto $filme, que, como visto acima, foi instanciado a partir da classe Filme em "$filme = new Filme();) e digo que o valor do atributo do filme ATUAL será o valor passado por parâmetro na função que estamos (criaFilme)
+    $filme->nome = $nome;
+    $filme->anoLancamento = $anoLancamento;
+    $filme->nota = $nota;
+    $filme->genero = $genero;
+    
+    return $filme;
  }
