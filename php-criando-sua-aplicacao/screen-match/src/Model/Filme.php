@@ -9,9 +9,9 @@ class Filme {
     // palavra reservada que vai me permitir acessar o atributo quando eu tiver um atributo do tipo "Filme" desejado vem antes do nome do atributo (no caso, o modificador public)
     // especificar o tipo do atributo é considerado uma boa prática e evita erros bobos como alguém passar o uma string para o atributo ano de lançamento
     // public vem antes do nosso atributo para especificar que podemos acessa-lo fora do nosso "Filme", ou seja, fora da classe Filme
-    public string $nome;
-    public int $anoLancamento;
-    public string $genero;
+    public string $nome = 'Nome padrão';
+    public int $anoLancamento = 2020;
+    public string $genero = "Pornografia pesada";
     // incializando meu array como um array vazio
     // utilizando private pois quero que apenas seja possivel acessar esse atributo de dentro da classe filme, pois seguindo nossa regra de negócio, qual é o sentido de, após eu receber minhas notas para meu filme (podendo realizar o cálculo da média dele e etc) e de repente no meu arquivo de execução eu zerar as notas com um: $meuFilme->notas = []; (definindo que o atributo é um array vazio) ou $meuFilme->notas =[0]; ?? isso não faz sentido e quebra nossa aplicação, as notas devem apenas ser adicionadas, não modificadas/removidas
     // qualquer outro código que não esteja dentro da classe não vai acessar essa propriedade/atributo notas - com private eu defino que qualquer arquivo/extensão não consiga ver este atributo fora da minha classe Filme, logo, essa linha aqui: $meuFilme->notas = []; me jogaria um erro no terminal dizendo que estou tentando acessar um atributo que eu não tenho acesso (claro, tentando fazer isso fora da minha classe/arquivo que minha classe está)
@@ -22,6 +22,7 @@ class Filme {
     * faço isso pois no "index.php" chamo meu método avalia (que passa valores para meu atributo notas, ou seja, comportamento fixo e filtrado, não permito que altere/delete a qualquer momento o valor do campo $notas, apenas que inclua, pois é isso que meu método publico "avalia" faz)
     * logo após, em "index.php" também, chamo meu método "media" que realiza a soma e calcula a média das notas presentes em $notas, mais uma vez, um COMPORTAMENTO ESPERADO E CONTROLADO POR MIM, fazendo exatamente o que eu quero, não manipulando o atributo livremente ao bel prazer do usuário
     * esse é o intuito do uso de atributos privados que compreendi, você irá usa-los de formas diferentes, desde valores fixos até permitir que recebão valores de fora, porém por meios seguros, como os "métodos", igual no exemplo que utilizamos agora onde permito manipular os valores de $notas de dentro da classe e o único comportamenteo que "permito"/é "publico" é o de inserção, que não é tão público assim pois, em um método eu passo valores para o atributo $notas através de um parâmetro do método "avalia" e depois, por estar dentro da classe e poder fazer isso, no outro método, eu apenas faço a soma de todos os valores presentes no array $notas e divido esse valor pela quantidade de itens que esse mesmo array ($notas) possui
+    * motivo importantisso e talvez até o principal para que os atributos sejam privados e possuam um get/setter cada um, é que, pensando na regra de negócio que o meu sistema tem/poderá ter, é o método mais seguro e eficiente (mas por que?) pelo simples fato de que, caso eu queira que no meu sistema de filmes, não haja nomes de filmes com palavrão, sem letras maiúsculas ou até mesmo sem números, eu posso simplesmente alterar o meu método de "setter" para adicionar minhas verificações e requisições para aquele filme ser setado/definido de fato sabe? pois, apenas imagine, como isso seria feito caso o atributo fosse publico e pudesse ser alterado em qualquer outro arquivo? todo lugar q tem uma setagem de filme em outros arquivos precisaria passar por essa verificação, seria um trabalho bem mais manual e complicado
     */
     private array $notas = [];
 
@@ -40,5 +41,18 @@ class Filme {
         // count conta a quantidade de itens dentro do array
         $quantidadeNotas = count($this->notas);
         return $somaNotas / $quantidadeNotas;
+    }
+
+    /*
+    * métodos de acesso, feitos devido ao conceito que, todo atributo privado DEVE ter seus metodos de acesso que são obrigatoriamente públicos
+    * método getter/recuperador = método de acesso que recupera uma informação para você, marjoritariamente em cenários que "poxa, quero ver o conteúdo do meu atributo privado "nome"", o getter te retorna esta informação (geralmente cada atributo privado terá seu método getter e setter (que define o valor daquela informação após você criar um objeto, e e por ele ser privado você não poder acessar deliberadamente/diretamente, terá este setter (metódo público) que lhe permite inserir informações no atributo))
+    */
+    public function get_nome():string{
+        return $this->nome;
+    }
+
+    public function set_nome($nomeFilme):void {
+        // traduzindo linha de código abaixo: o atributo/propriedade "nome" do objeto que está chamando este método (set_nome // por conta do $this) irá receber como seu valor o conteúdo do parâmetro $nomeFilme
+        $this->nome = $nomeFilme;
     }
 }
