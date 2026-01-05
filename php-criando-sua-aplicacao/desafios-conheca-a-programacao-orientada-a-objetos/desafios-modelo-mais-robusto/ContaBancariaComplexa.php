@@ -22,31 +22,33 @@ class ContaBancariaComplexa
         return $this->ativa;
     }
 
-    public function deposito(float $valorDeposito): void
+    public function deposito(float $valorDeposito): bool
     {
         if ($this->verificaAtividade() && $valorDeposito > 0) {
             $this->saldo += $valorDeposito;
-            echo "Deposito realizado na conta do cliente: " . $this->cliente->getNome() . " - Saldo atual: " . $this->saldo . PHP_EOL;
+            return true;
         } else {
-            echo "conta inativa ou valor invalido para depósito" . PHP_EOL;
+            return false;
         }
     }
 
-    public function saque($valorSaque): void {
-        if ($this->verificaAtividade() && $valorSaque > 0 && $valorSaque < $this->saldo) {
+    public function saque(float $valorSaque): bool
+    {
+        if ($this->verificaAtividade() && $valorSaque > 0 && $valorSaque <= $this->saldo) {
             $this->saldo -= $valorSaque;
-            echo "Saque realizado na conta do cliente: " . $this->cliente->getNome()  . " - Saldo atual: " . $this->saldo . PHP_EOL;
+            return true;
         } else {
-            echo "conta inativa ou valor de saque invalido" . PHP_EOL;
+            return false;
         }
     }
 
-    public function encerrarConta(): void{
+    public function encerrarConta(): bool
+    {
         if ($this->verificaAtividade()) {
             $this->ativa = false;
-            echo "Conta do cliente: " . $this->cliente->getNome() . " foi encerrada com sucesso." . PHP_EOL;
+            return true;
         } else {
-            echo "conta já se encontra inativa." . PHP_EOL;
+            return false;
         }
     }
 }
