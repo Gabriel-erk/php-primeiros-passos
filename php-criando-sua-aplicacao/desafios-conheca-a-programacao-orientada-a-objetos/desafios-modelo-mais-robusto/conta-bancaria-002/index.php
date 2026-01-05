@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/Cliente.php';
-require_once __DIR__ . '/ContaBancariaComplexa.php';
+require_once __DIR__ . '/ContaBancaria.php';
 
 $cliente = new Cliente("Gabriel Erick", "588.888.341-79");
-$contaBancaria = new ContaBancariaComplexa($cliente, 2000);
+$contaBancaria = new ContaBancaria($cliente, 2000);
 
 if ($contaBancaria->deposito(2000)) {
     echo "Deposito realizado na conta do cliente: " . $cliente->getNome() . " - Saldo atual: " . $contaBancaria->getSaldo() . PHP_EOL;

@@ -1,5 +1,5 @@
 <?php
-class ContaBancariaComplexa
+class ContaBancaria
 {
     private bool $ativa;
     public function __construct(private Cliente $cliente, private float $saldo)
