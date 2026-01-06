@@ -1,9 +1,12 @@
 <?php 
+// incluindo o genero antes do filme pois o próprio filme usa o genero
+require_once __DIR__ . "/src/Model/Genero.php";
 require_once __DIR__ . "/src/Model/Filme.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
 // objeto da classe filme
-$filme = new Filme("Homem-aranha: de volta ao lar", 2020, "super-heroi");
+// sintaxe para utilizar o tipo (enum) Genero é chamar o enum "Genero::umDosCasosPossiveisAqui", como abaixo, coloquei o valor correspondente ao case "SuperHeroi", mas poderia ser acao etc
+$filme = new Filme("Homem-aranha: de volta ao lar", 2020, Genero::SuperHeroi);
 /* 
 * pedaço de código abaixo foi comentado pois agora, todos os meus atributos/propriedades estão PRIVADOS, logo, eu não consigo acessa-los de um arquivo de FORA DA MINHA CLASSE e inserir dados em massa (mas pq isso? pois é uma boa prática e mantem o código mais seguro e consiso, pois, qual o sentido de eu deixar livremente para qualquer arquivo simplesmente entrar e manipular as informações tão facilmente? outra coisa, qual a lógica disso? depois que um filme foi lançado, o nome dele muda toda hora? depois de um filme ser lançado, seu ano de lançamento muda toda hora? o genêro, por exemplo de thor ragnarok muda de ação pra romance do nada? exatamente, não faz sentido! por isso esses atributos/propriedades DEVEM ser privados, e utilizaremos de outra abordagem abaixo para colocar informações dentro dos atributos de um objeto)
 */
@@ -18,5 +21,5 @@ $filme->avalia(5);
 
 var_dump($filme);
 echo $filme->media() . PHP_EOL;
-echo $filme->getAnoLancamento() . PHP_EOL;
+echo $filme->anoLancamento . PHP_EOL;
 
