@@ -1,10 +1,9 @@
 <?php 
 
-class Serie 
+class Serie extends Titulo
 {
-    public string $nome;
-    public int $qntdEpisodios;
-    public float $duracaoPorEpisodio;
-    public bool $possuiLegenda;
+    public function __construct(public readonly int $temporadas, public readonly int $episodiosPorTemporadas, public readonly int $minutosPorEpisodio)
+    {
+    }
 }
 

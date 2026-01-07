@@ -1,6 +1,7 @@
 <?php 
 // incluindo o genero antes do filme pois o próprio filme usa o genero
 require_once __DIR__ . "/src/Model/Genero.php";
+require_once __DIR__ . "/src/Model/Titulo.php";
 require_once __DIR__ . "/src/Model/Filme.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
