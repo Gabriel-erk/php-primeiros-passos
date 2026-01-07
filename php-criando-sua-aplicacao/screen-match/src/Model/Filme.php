@@ -22,7 +22,7 @@ class Filme
     * agora meu atributo $genero é do tipo "Genero", assim passarei um valor do mesmo tipo para ele durante a instanciação do objeto no escopo global do sistema
     */
 
-    public function __construct(public readonly string $nome, public readonly int $anoLancamento, public readonly Genero $genero)
+    public function __construct(public readonly string $nome, public readonly int $anoLancamento, public readonly Genero $genero, public readonly int $duracaoEmMinutos)
     {
       
         $this->notas = [];
