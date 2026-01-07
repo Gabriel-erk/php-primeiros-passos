@@ -1,8 +1,9 @@
-<?php 
+<?php
 // incluindo o genero antes do filme pois o próprio filme usa o genero
 require_once __DIR__ . "/src/Model/Genero.php";
 require_once __DIR__ . "/src/Model/Titulo.php";
 require_once __DIR__ . "/src/Model/Filme.php";
+require_once __DIR__ . "/src/Model/Serie.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
 // objeto da classe filme
@@ -24,3 +25,14 @@ var_dump($filme);
 echo $filme->media() . PHP_EOL;
 echo $filme->anoLancamento . PHP_EOL;
 
+$serie = new Serie("Arcane", 2021, Genero::Acao, 2, 9, 50);
+var_dump($serie);
+
+echo $serie->anoLancamento . PHP_EOL;
+
+$serie->avalia(10);
+$serie->avalia(5);
+$serie->avalia(7);
+$serie->avalia(8);
+
+echo $serie->media();

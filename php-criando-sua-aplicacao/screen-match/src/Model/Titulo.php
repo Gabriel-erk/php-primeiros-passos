@@ -6,7 +6,7 @@ class Titulo
     // aqui apenas os atributos e métodos essenciais/em comum entre as classes Filme e Serie, o resto, elas aplicarão depois/em seus próprios arquivos
     // aqui a nossa Série "é um título" e nosso filme também é um "título" pois eles serão como "filho" da nossa classe titulo, herdando suas caracteristicas e ações (metodos) mas também tendo suas próprias características
     private array $notas;
-     /*
+    /*
     * método construtor
     * método chamado AUTOMATICAMENTE após a criação/instanciação de um objeto a partir desta classe 
     * todo método chamado automaticamente em php começa com a sigla "__" antes de seu nome
@@ -22,7 +22,6 @@ class Titulo
     */
     public function __construct(public readonly string $nome, public readonly int $anoLancamento, public readonly Genero $genero)
     {
-
         $this->notas = [];
     }
 
