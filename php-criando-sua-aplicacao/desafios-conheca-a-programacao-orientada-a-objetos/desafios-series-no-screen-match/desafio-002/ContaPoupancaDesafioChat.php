@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ContaPoupancaDesafioChat extends ContaBancariaDesafioChat
 {
@@ -6,5 +6,16 @@ class ContaPoupancaDesafioChat extends ContaBancariaDesafioChat
     {
         parent::__construct($cliente, $saldo);
     }
-    // não reescrevi pois na classe pai eu já não permito valores negativos
+    
+    // reescrevendo classe sacar apenas com a regra de que não é possível sacar valores negativos e zero e que aqui não aplicamos a taxa/limite de saque
+    public function sacar(float $valor): bool
+    {
+        if ($valor >= 0) {
+            $this->saldo -= $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
