@@ -13,23 +13,27 @@ $contaCorrenteClienteUm = new ContaCorrenteDesafioChat($clienteUm, 23000);
 echo "------------ TESTES CONTA CORRENTE ------------" . PHP_EOL;
 // echo var_dump($contaCorrenteClienteUm);
 echo $contaBancariaService->estaAtiva($contaCorrenteClienteUm) . PHP_EOL;
-echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
+echo "Saldo inicial: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
 echo $contaBancariaService->depositar($contaCorrenteClienteUm, 2000) . PHP_EOL;
 echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
+// saque foi efetuado descontando a taxa baseado na regra que estipulei
 echo $contaBancariaService->sacar($contaCorrenteClienteUm, 3000) . PHP_EOL;
 echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
 
 // echo var_dump($contaCorrenteClienteUm);
 // se realizar o saque abaixo não vai dar pois é maior que o limite estipulado de 10k
 // echo $contaBancariaService->sacar($contaCorrenteClienteUm, 22000) . PHP_EOL;
+// segundo saque efetuado e descontando a taxa com base na regra que estipulei
 echo $contaBancariaService->sacar($contaCorrenteClienteUm, 10000) . PHP_EOL;
 echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
 echo $contaBancariaService->sacar($contaCorrenteClienteUm, 10000) . PHP_EOL;
 echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
-echo $contaBancariaService->sacar($contaCorrenteClienteUm, 2000) . PHP_EOL;
+// removendo o restinho que sobrou dos descontos com a taxa
+echo $contaBancariaService->sacar($contaCorrenteClienteUm, 800) . PHP_EOL;
 echo "Novo saldo: " . $contaCorrenteClienteUm->getSaldo() . PHP_EOL;
 echo $contaBancariaService->desativarConta($contaCorrenteClienteUm) . PHP_EOL;
 echo $contaBancariaService->estaAtiva($contaCorrenteClienteUm) . PHP_EOL;
+// saque para não funcionar
 echo $contaBancariaService->sacar($contaCorrenteClienteUm, 2000) . PHP_EOL;
 
 echo "------------ TESTES CONTA POUPANÇA ------------" . PHP_EOL;
