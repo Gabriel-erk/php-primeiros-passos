@@ -4,6 +4,7 @@ require_once __DIR__ . "/src/Model/Genero.php";
 require_once __DIR__ . "/src/Model/Titulo.php";
 require_once __DIR__ . "/src/Model/Filme.php";
 require_once __DIR__ . "/src/Model/Serie.php";
+require_once __DIR__ . "/src/Calculos/CalculadoraDeMaratona.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
 // objeto da classe filme
@@ -35,4 +36,10 @@ $serie->avalia(5);
 $serie->avalia(7);
 $serie->avalia(8);
 
-echo $serie->media();
+echo $serie->media() . PHP_EOL;
+
+$calculadora = new CalculadoraDeMaratona();
+$calculadora->inclui($serie);
+echo "você tem " . $calculadora->getDuracao() . " minutos para maratonar" . PHP_EOL;
+$calculadora->inclui($filme);
+echo "você tem " . $calculadora->getDuracao() . " minutos para maratonar" . PHP_EOL;
