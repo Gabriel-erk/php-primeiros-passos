@@ -1,6 +1,6 @@
 <?php
 
-class ContaBancariaDesafioChat
+abstract class ContaBancariaDesafioChat
 {
     private bool $ativa;
     public const float LIMITE_SAQUE_PADRAO = 10000; // obviamente um readonly não funciona em uma constante KKKKKK, seu valor não pode ser trocado né jegue
@@ -44,10 +44,10 @@ class ContaBancariaDesafioChat
         }
     }
 
-    // metódo que será sobreescrito nas classes filhas
+    // metódo que será sobreescrito nas classes filhas - não fazer verificação de limite saque aqui na abstrata, apenas as regras comuns a todas as contas
     public function sacar(float $valor): bool
     {
-        if ($valor > 0 && $valor <= $this->saldo && $valor <= self::LIMITE_SAQUE_PADRAO) {
+        if ($valor > 0 && $valor <= $this->saldo  && $this->estaAtiva()) {
             $this->saldo -= $valor;
             return true;
         } else {

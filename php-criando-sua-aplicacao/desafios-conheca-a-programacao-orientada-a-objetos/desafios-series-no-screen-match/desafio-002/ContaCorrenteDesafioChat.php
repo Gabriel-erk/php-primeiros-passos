@@ -10,7 +10,7 @@ class ContaCorrenteDesafioChat extends ContaBancariaDesafioChat
     // sobrescrevendo método saque da classe pai
     public function sacar(float $valor): bool{
         if ($valor > 0 && $valor <= $this->saldo && $valor <= $this->saldo + self::LIMITE_SAQUE_PADRAO) {
-            if ($this->saldo > self::TAXA_MANUTENCAO * 2 + $valor) {
+            if (($this->saldo - self::TAXA_MANUTENCAO) > 0) {
                 $this->saldo -= self::TAXA_MANUTENCAO + $valor;
                 return true;
             }
