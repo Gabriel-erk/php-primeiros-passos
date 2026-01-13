@@ -44,14 +44,6 @@ abstract class ContaBancariaDesafioChat
         }
     }
 
-    // metódo que será sobreescrito nas classes filhas - não fazer verificação de limite saque aqui na abstrata, apenas as regras comuns a todas as contas
-    public function sacar(float $valor): bool
-    {
-        if ($valor > 0 && $valor <= $this->saldo  && $this->estaAtiva()) {
-            $this->saldo -= $valor;
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // metódo que será sobreescrito nas classes filhas e já que cada conta vai ter suas próprias regras de saque, então esse método aqui não terá implementação, apenas a assinatura do método (assinatura = nome do método + parâmetros + tipo de retorno) e obviamente será abstrato, pois não terá implementação aqui na classe mãe
+    public abstract function sacar(float $valor): bool;
 }
