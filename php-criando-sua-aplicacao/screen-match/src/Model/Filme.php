@@ -16,4 +16,10 @@ class Filme extends Titulo
         parent::__construct($nome, $anoLancamento, $genero);
     }
 
+    // sobrescrevendo o método duracaoEmMinutos da classe Titulo, pois por mais que seja o mesmo "metódo" (com mesmo nome e retorno), o comportamento dele é diferente, pois agora ele retornará o valor do atributo $duracaoEmMinutos que é específico do filme (já que cada filme tem uma duração diferente), coisa que na classe Titulo não faz sentido, pois lá não existe esse atributo (já que é genérico) e não faria sentido fazer isso naquela classe pois iria quebrar o comportamente das outras classes que a herdam (como a série, e caso queira expandir para "videos", "documentários" etc quebraria o comportamento delas também pois o comportamento do método duracaoEmMinutos da classe que deveria ser genéria está sendo específo para filmes apenas, coisa que não deve acontecer, por isso, implemento um método de forma genérica em "Titulo" e para cada classe filha eu reescrevo o método, permitindo que ele tenha um comportamento diferente para cada classe que o chama-lo)
+    public function duracaoEmMinutos(): int
+    {
+        return $this->duracaoEmMinutos;
+    }
+
 }

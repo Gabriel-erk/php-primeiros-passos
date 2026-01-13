@@ -43,4 +43,10 @@ class Titulo
         $quantidadeNotas = count($this->notas);
         return $somaNotas / $quantidadeNotas;
     }
+
+    // é necessário deixar essa estrutura padrão com o "return 0" para que o método exista respeitando o limite que colocamos de : "este método irá retornar um valor do tipo inteiro", caso contrário, se não tivesse esse "return 0", o php reclamaria que o método não está retornando nada, quebrando a aplicação, deixamos esse return 0 apenas para respeitar a estrutura do método, porém, ele será sobrescrito nas classes filhas (filme e série) para que cada uma retorne o valor correto de duração em minutos, logo fica claro que este método aqui, da clase Titulo, não será utilizado diretamente, apenas servirá como base para as classes filhas
+    public  function duracaoEmMinutos(): int
+    {
+        return 0;
+    }
 }
