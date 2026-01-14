@@ -1,6 +1,6 @@
 <?php
 
-abstract class Titulo
+class Titulo
 {
     // classe "Titulo" que vai possuir as características em comum tanto da classe "Filme" quanto da classe "Serie", pois, eles tem muita coisa em comum e sem esse método que usaremos aqui, teriamos que repetir muito código, o que, pensando em boas práticas e no futuro, não é uma ação recomendada (pois, caso fique duplicando código, caso nossa regra de negócio mude ou aquela (por exemplo) método de problema ou precise de reestrutruração? teria que mudar tudo manualmente, o que pode causar um caos e mais problemas, dessa forma que faremos, caso precise alteramos apenas em um lugar e todos os outros lugares que possuem vínculo serão atingidos automaticamente)
     // aqui apenas os atributos e métodos essenciais/em comum entre as classes Filme e Serie, o resto, elas aplicarão depois/em seus próprios arquivos
@@ -44,9 +44,9 @@ abstract class Titulo
         return $somaNotas / $quantidadeNotas;
     }
 
-    // método abstrato (permitido apenas em classes abstratas, ou seja, classes que não podem ser instanciadas diretamente, apenas herdadas por outras classes) pois todas as classes filhas tem que ter este método (filme,série...) porém cada uma tem um jeito diferente de implementar este método, ou seja, o método, no MOMENTO atual não sabe sua forma, ele apenas terá uma no momento em que ele + seu corpo forem definidos em uma classe filha/subclasse que herdou da classe abstrata atual (Titulo), por isso é um método abstrato, ele terá diferentes formas (terá comportamentos diferentes) dependendo de qual classe filha for utiliza-lo
-    // este método ainda é abstrato, ele (neste momento) ainda não tem uma implementação, quem for especializar a classe titulo (serie, filme, até mesmo mini-serie) ai sim precisará definir uma implementação para este método
-    // palavra reservada abstract pode vir depois de "Public" porém por convenção e boas práticas, é recomendado colocar antes
-    // ao extender de titulo, por esse método ser abstrato, é OBRIGATÓRIA a implementação deste método na classe filha de Titulo
-    abstract public function duracaoEmMinutos(): int;
+    // é necessário deixar essa estrutura padrão com o "return 0" (conhecido como "implementação falsa") para que o método exista respeitando o limite que colocamos de : "este método irá retornar um valor do tipo inteiro", caso contrário, se não tivesse esse "return 0", o php reclamaria que o método não está retornando nada, quebrando a aplicação, deixamos esse return 0 apenas para respeitar a estrutura do método, porém, ele será sobrescrito nas classes filhas (filme e série) para que cada uma retorne o valor correto de duração em minutos, logo fica claro que este método aqui, da clase Titulo, não será utilizado diretamente, apenas servirá como base para as classes filhas
+    public  function duracaoEmMinutos(): int
+    {
+        return 0;
+    }
 }
