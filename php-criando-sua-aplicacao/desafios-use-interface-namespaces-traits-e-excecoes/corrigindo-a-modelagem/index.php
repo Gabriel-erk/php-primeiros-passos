@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/ClienteTa.php';
 require_once __DIR__ . '/ContaBancariaTa.php';
+require_once __DIR__ . '/TipoContaTa.php';
 require_once __DIR__ . '/ContaCorrenteTa.php';
 require_once __DIR__ . '/ContaPoupancaTa.php';
 require_once __DIR__ . '/ContaBancariaServiceTa.php';
@@ -13,8 +14,8 @@ $contaPoupanca = new ContaPoupancaTa($cliente, 23000);
 $contaBancariaService = new ContaBancariaServiceTa(); 
 
 echo "==== ATIVAÇÃO INICIAL ====" . PHP_EOL;
-echo "Status conta corrente: " . $contaBancariaService->status($contaCorrente) . PHP_EOL;
-echo "Status conta poupança: " . $contaBancariaService->status($contaPoupanca) . PHP_EOL;
+echo "Status 1: " . $contaBancariaService->status($contaCorrente) . PHP_EOL;
+echo "Status 2: " . $contaBancariaService->status($contaPoupanca) . PHP_EOL;
 
 echo "==== DEPÓSITOS VÁLIDOS ====" . PHP_EOL;
 echo $contaBancariaService->depositar($contaCorrente, 400);
