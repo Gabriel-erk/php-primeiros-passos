@@ -5,7 +5,7 @@ class ContaCorrenteTa extends ContaBancariaTa
     public const TAXA_MANUTENCAO = 400;
     public function __construct(ClienteTa $cliente, float $saldo)
     {
-        parent::__construct($cliente, $saldo);
+        parent::__construct($cliente, $saldo, TipoContaTa::Corrente);
     }
     // implementando método sacar na classe filha de "ContaBancariaTa" onde o método sacar foi definido como abstrato (ou seja, defindo para ter sua implementação/definição do seu comportamento/body de método nas classes filhas obrigatoriamente contando que elas não sejam abstratas também)
     // conceito também de polimorfismo onde o mesmo método pode assumir diferentes formas

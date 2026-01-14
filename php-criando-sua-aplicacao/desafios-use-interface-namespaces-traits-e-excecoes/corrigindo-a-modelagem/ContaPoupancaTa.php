@@ -1,15 +1,15 @@
 <?php
 
+/**
+ * não possui taxa
+ * não pode sacar mais que o saldo
+ * não pode sacar valor menor ou igual a zero
+ */
 class ContaPoupancaTa extends ContaBancariaTa
 {
-    /**
-     * não possui taxa
-     * não pode sacar mais que o saldo
-     * não pode sacar valor menor ou igual a zero
-     */
     public function __construct(ClienteTa $cliente, float $saldo)
     {
-        parent::__construct($cliente, $saldo);
+        parent::__construct($cliente, $saldo, TipoContaTa::Poupanca);
     }
 
     public function sacar(float $valor): bool
@@ -21,5 +21,4 @@ class ContaPoupancaTa extends ContaBancariaTa
             return false;
         }
     }
-
 }
