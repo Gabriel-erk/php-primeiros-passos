@@ -46,7 +46,7 @@ echo $contaBancariaService->depositar($contaCorrente, 14400) . PHP_EOL;
 echo $contaBancariaService->saldo($contaCorrente) . PHP_EOL;
 echo "\n";
 
-echo "==== SAQUES VÁLIDOS ====" . PHP_EOL;
+echo "==== SAQUES VÁLIDOS + SAQUE POLIMÓRFICO ====" . PHP_EOL;
 /* 
 * saque em conta corrente
 */
@@ -60,7 +60,7 @@ echo $contaBancariaService->sacar($contaPoupanca, 400) . PHP_EOL;
 echo $contaBancariaService->saldo($contaPoupanca) . PHP_EOL;
 echo "\n";
 
-echo "==== SAQUES INVÁLIDOS ====" . PHP_EOL;
+echo "==== SAQUES INVÁLIDOS + SAQUE POLIMÓRFICO ====" . PHP_EOL;
 /* 
 * teste em conta corrente
 */
@@ -100,5 +100,52 @@ echo $contaBancariaService->sacar($contaPoupanca, 1000) . PHP_EOL;
 echo $contaBancariaService->saldo($contaPoupanca) . PHP_EOL;
 // reativando conta poupança e repondo valores para mais outros testes
 echo $contaBancariaService->ativar($contaPoupanca) . PHP_EOL;
+echo $contaBancariaService->depositar($contaPoupanca, 24600) . PHP_EOL;
+echo $contaBancariaService->saldo($contaPoupanca) . PHP_EOL;
 // tentando ativar uma conta já ativa
 echo $contaBancariaService->ativar($contaPoupanca) . PHP_EOL;
+echo "\n";
+
+echo "==== TENTATIVA DE DESATIVAR COM SALDO DIFERENTE DE 0 ====" . PHP_EOL;
+/*
+* conta corrente 
+* como estou aplicando um \n (quebra de linha aqui no terminal) entre uma linha de comando e outra (para separar conta corrente da conta poupança), não preciso aplicar um php_eol no final de cada linha de comando de tentativa incorreta de desativação de contas 
+*/
+echo $contaBancariaService->desativar($contaCorrente);
+echo "\n";
+/*
+* conta poupança 
+*/
+echo $contaBancariaService->desativar($contaPoupanca);
+echo "\n";
+
+echo "==== DESATIVAÇÃO CORRETA DAS CONTAS ====" . PHP_EOL;
+/*
+* conta corrente
+* esvaziando a conta corrente seguindo limite de saque padrão estabelecido em 10000, taxa de 400, conta ativa, valor maior que zero e (valor a ser sacado + constante de taxa de manutenção) sendo menores ou iguais ao saldo em conta
+*/
+echo $contaBancariaService->sacar($contaCorrente, 10000) . PHP_EOL;
+echo $contaBancariaService->saldo($contaCorrente) . PHP_EOL;
+echo $contaBancariaService->sacar($contaCorrente, 3600) . PHP_EOL;
+echo $contaBancariaService->saldo($contaCorrente) . PHP_EOL;
+echo $contaBancariaService->desativar($contaCorrente) . PHP_EOL;
+echo "\n";
+/*
+* conta poupança
+* esvaziando a conta poupança seguindo limite de saque (valor a ser sacado deve ser menor ou igual ao saldo em conta), valores positivos e conta ativa
+*/
+echo $contaBancariaService->sacar($contaPoupanca, 24600) . PHP_EOL;
+echo $contaBancariaService->saldo($contaPoupanca) . PHP_EOL;
+echo $contaBancariaService->desativar($contaPoupanca) . PHP_EOL;
+echo "\n";
+
+echo "==== TENTATIVA DE SAQUE COM CONTA DESATIVADA ====" . PHP_EOL;
+/*
+* conta corrente
+*/
+echo $contaBancariaService->sacar($contaCorrente, 4000) . PHP_EOL;
+echo "\n";
+/*
+* conta poupança
+*/
+echo $contaBancariaService->sacar($contaPoupanca, 9088) . PHP_EOL;
