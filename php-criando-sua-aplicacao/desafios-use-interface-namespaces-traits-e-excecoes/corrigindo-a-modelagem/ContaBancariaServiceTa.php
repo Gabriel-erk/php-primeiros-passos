@@ -19,7 +19,7 @@ class ContaBancariaServiceTa
         if ($conta->sacar($valor)) {
             return "Saque na conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " realizada com sucesso!";
         } else {
-            return "Saque na conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " não foi realizada, verificar se conta está ativa ou digitou um valor válido (respeitando limite de saque e taxa de manutenção).";
+            return "Saque na conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " não foi realizada, verificar se conta está ativa ou digitou um valor válido (respeitando limite de saque e taxa de manutenção (taxa de manutenção apenas em contas correntes))."; // esclareço apenas que a taxa de manuteção existe em contas correntes pois contas poupanças não tem, e por mais que eu não use a contante "LIMITE_SAQUE_PADRAO" em contas poupanças elas também tem um "limite" não explicito, que seria o "$valor <= $this->saldo" , onde o limite de valor para saques em conta poupança é que "o valor que voce quer sacar TEM que ser menor ou igual seu saldo em conta", logo, também possuimos um limite indireto em contas poupanças, por mais que não use a constante "LIMITE_SAQUE_PADRAO"  
         }
     }
 
@@ -35,9 +35,9 @@ class ContaBancariaServiceTa
     public function ativar(ContaBancariaTa $conta): string
     {
         if ($conta->ativar()) {
-            return "Conta do cliente: " . $conta->cliente->nome . " foi reativada com sucesso!";
+            return "Conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " foi reativada com sucesso!";
         } else {
-            return "Conta do cliente: " . $conta->cliente->nome . " já se encontra ativa.";
+            return "Conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " já se encontra ativa.";
         }
     }
 
@@ -52,6 +52,11 @@ class ContaBancariaServiceTa
 
     public function saldo(ContaBancariaTa $conta): string
     {
-        return "O saldo da conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " é de R$ " . number_format($conta->getSaldo(), 2, ',', '.');
+        // seguindo com base na nossa regra de negócio, uma conta só pode ser desativada caso esteja com o saldo zerado, logo, qual o sentido de tentar acessar o valor que possui? ele obviamente sempre vai ser zero, então para deixar esse sistema mais vivo, colocarei essa verificação, se a conta estiver ativa, ela PODE ter um saldo diferente de zero, logo aplico uma mensagem personalizada, do contrário, lembro o usuário que sua conta está desativada e obviamente não possui saldo disponível/diferente de zero
+        if ($conta->estaAtiva()) {
+            return "O saldo da conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " é de R$ " . number_format($conta->getSaldo(), 2, ',', '.');
+        } else {
+            return "Contas desativadas não possuem saldo.";
+        }
     }
 }
