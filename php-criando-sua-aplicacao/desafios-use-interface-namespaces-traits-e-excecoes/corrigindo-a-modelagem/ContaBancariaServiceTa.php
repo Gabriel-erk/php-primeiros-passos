@@ -32,6 +32,15 @@ class ContaBancariaServiceTa
         }
     }
 
+    public function ativar(ContaBancariaTa $conta): string
+    {
+        if ($conta->ativar()) {
+            return "Conta do cliente: " . $conta->cliente->nome . " foi reativada com sucesso!";
+        } else {
+            return "Conta do cliente: " . $conta->cliente->nome . " já se encontra ativa.";
+        }
+    }
+
     public function status(ContabancariaTa $conta): string
     {
         if ($conta->estaAtiva()) {

@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 // abstract pois não quero que seja instanciada diretamente (não quero que objetos sejam feitos a partir desta classe)
-abstract class ContaBancariaTa {
+abstract class ContaBancariaTa
+{
     // especifiquei como TA para padronizar como o nome dos arquivos desse exercicio estão e por conta que, quando chamei essa constante em uma das classes, associou com a constante de mesmo nome em outra classe de OUTRO exercicio (o que nao era o que eu queria), então deixei único o nome dessa constante de todos os arquivos presentes nesse repositório para não aver erro
     public const LIMITE_SAQUE_PADRAO_TA = 10000;
     private bool $ativa;
@@ -13,15 +14,18 @@ abstract class ContaBancariaTa {
     }
 
     // por mais que esteja publico, não tem como eu chamar este método em um arquivo de execução, sem uma instancia dessa classe (o que é impossivel pois é abstrata) ou a instancia de uma das classes filhas, logo, no momento posso deixar como public o modificador deste método
-    public function getSaldo(): float{
+    public function getSaldo(): float
+    {
         return $this->saldo;
     }
 
-    public function estaAtiva(): bool{
+    public function estaAtiva(): bool
+    {
         return $this->ativa;
     }
 
-    public function depositar(float $valor): bool{
+    public function depositar(float $valor): bool
+    {
         if ($this->estaAtiva() && $valor > 0) {
             $this->saldo += $valor;
             return true;
@@ -30,9 +34,20 @@ abstract class ContaBancariaTa {
         }
     }
 
-    public function desativar(): bool{
+    public function desativar(): bool
+    {
         if ($this->saldo == 0 && $this->estaAtiva()) {
             $this->ativa = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ativar(): bool
+    {
+        if ($this->ativa == false) {
+            $this->ativa = true;
             return true;
         } else {
             return false;
