@@ -16,6 +16,10 @@ $contaBancariaService = new ContaBancariaServiceTa();
 echo "==== ATIVAÇÃO INICIAL ====" . PHP_EOL;
 echo "Status 1: " . $contaBancariaService->status($contaCorrente) . PHP_EOL;
 echo "Status 2: " . $contaBancariaService->status($contaPoupanca) . PHP_EOL;
-
+echo "\n";
 echo "==== DEPÓSITOS VÁLIDOS ====" . PHP_EOL;
-echo $contaBancariaService->depositar($contaCorrente, 400);
+echo $contaBancariaService->depositar($contaCorrente, 400) . PHP_EOL;
+echo $contaBancariaService->saldo($contaCorrente) . PHP_EOL;
+echo "\n";
+echo $contaBancariaService->depositar($contaPoupanca, 2000) . PHP_EOL;
+echo $contaBancariaService->saldo($contaPoupanca) . PHP_EOL;

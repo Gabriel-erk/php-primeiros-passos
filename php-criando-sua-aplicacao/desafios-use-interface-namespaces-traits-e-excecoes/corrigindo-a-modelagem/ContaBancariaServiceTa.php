@@ -40,4 +40,9 @@ class ContaBancariaServiceTa
             return "Conta " . $conta->tipoConta->value . " está desativada.";
         }
     }
+
+    public function saldo(ContaBancariaTa $conta): string
+    {
+        return "O saldo da conta " . $conta->tipoConta->value . " do cliente: " . $conta->cliente->nome . " é de R$ " . number_format($conta->getSaldo(), 2, ',', '.');
+    }
 }
