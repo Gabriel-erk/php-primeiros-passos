@@ -4,6 +4,7 @@ require_once __DIR__ . "/src/Model/Genero.php";
 require_once __DIR__ . "/src/Model/Titulo.php";
 require_once __DIR__ . "/src/Model/Filme.php";
 require_once __DIR__ . "/src/Model/Serie.php";
+require_once __DIR__ . "/src/Model/Episodio.php";
 require_once __DIR__ . "/src/Calculos/CalculadoraDeMaratona.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
@@ -28,6 +29,7 @@ echo $filme->anoLancamento . PHP_EOL;
 
 $serie = new Serie("Arcane", 2021, Genero::Acao, 2, 9, 50);
 var_dump($serie);
+$episodioSerie = new Episodio($serie, "Ashes and Blood", 5);
 
 echo $serie->anoLancamento . PHP_EOL;
 
