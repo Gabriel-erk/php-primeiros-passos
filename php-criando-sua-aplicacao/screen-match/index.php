@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/src/Model/Avaliavel.php";
 // incluindo o genero antes do filme pois o próprio filme usa o genero
 require_once __DIR__ . "/src/Model/Genero.php";
 require_once __DIR__ . "/src/Model/Titulo.php";
@@ -6,6 +7,7 @@ require_once __DIR__ . "/src/Model/Filme.php";
 require_once __DIR__ . "/src/Model/Serie.php";
 require_once __DIR__ . "/src/Model/Episodio.php";
 require_once __DIR__ . "/src/Calculos/CalculadoraDeMaratona.php";
+require_once __DIR__ . "/src/Calculos/ConversorNotaEstrela.php";
 
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
 // objeto da classe filme
@@ -45,3 +47,7 @@ $calculadora->inclui($serie);
 echo "você tem " . $calculadora->getDuracao() . " minutos para maratonar" . PHP_EOL;
 $calculadora->inclui($filme);
 echo "você tem " . $calculadora->getDuracao() . " minutos para maratonar" . PHP_EOL;
+
+$conversorNotaEstrela = new ConversorNotaEstrela();
+echo $conversorNotaEstrela->converte($serie) . PHP_EOL;
+echo $conversorNotaEstrela->converte($filme);

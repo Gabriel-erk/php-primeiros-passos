@@ -1,6 +1,7 @@
 <?php 
 
-class Serie extends Titulo
+// é possível implementar mais de uma interface separando por vírgula
+class Serie extends Titulo 
 {
     public function __construct(string $nome, int $anoLancamento, Genero $genero, public readonly int $temporadas, public readonly int $episodiosPorTemporada, public readonly int $minutosPorEpisodio)
     {
