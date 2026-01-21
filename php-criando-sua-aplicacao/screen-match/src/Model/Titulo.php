@@ -10,10 +10,14 @@
  */
 abstract class Titulo implements Avaliavel
 {
+    // dizendo que nossa classe Titulo vai utilizar nossa Trait(característica) ComAvaliacao - logo, as subclasses(classes filhas/que herdam de Titulo também terão acesso)
+    // por debaixo dos panos o que essa palavra reservada use faz é o mesmo que o require nos arquivos principais, ele pega, copia o conteúdo dentro das chaves {} da nossa Trait e cola aqui, apenas isso, logo, dessa forma, teremos acesso ao atributo privado $notas e os métodos "media()" e "avalia(float $nota)"
+    // como removemos os métodos desse arquivo, ele apitaria um erro dizendo que ele precisa ter os métodos "media()" e "avalia(float $nota)" devido ao nosso contrato (interface) que diz que DEVEMOS ter esses métodos para podermos existir, porém, eles são implementados na nossa Trait, e como expliquei acima, ao usar o "use" estamos copiando e colando o conteúdo da nossa trait, onde estamos implementando justamente os métodos "media()" e "avalia(float $nota)" que precisamos para cumprir com "as condições do nosso contrato"
+    // é possivel utilizar mais de uma trait (obviamente, com métodos com nomes diferentes), separando por "," em um único "use" ou colocando vários "use" um abaixo do outro
+    use ComAvaliacao;
     // classe "Titulo" que vai possuir as características em comum tanto da classe "Filme" quanto da classe "Serie", pois, eles tem muita coisa em comum e sem esse método que usaremos aqui, teriamos que repetir muito código, o que, pensando em boas práticas e no futuro, não é uma ação recomendada (pois, caso fique duplicando código, caso nossa regra de negócio mude ou aquela (por exemplo) método de problema ou precise de reestrutruração? teria que mudar tudo manualmente, o que pode causar um caos e mais problemas, dessa forma que faremos, caso precise alteramos apenas em um lugar e todos os outros lugares que possuem vínculo serão atingidos automaticamente)
     // aqui apenas os atributos e métodos essenciais/em comum entre as classes Filme e Serie, o resto, elas aplicarão depois/em seus próprios arquivos
     // aqui a nossa Série "é um título" e nosso filme também é um "título" pois eles serão como "filho" da nossa classe titulo, herdando suas caracteristicas e ações (metodos) mas também tendo suas próprias características
-    private array $notas;
     /*
     * método construtor
     * método chamado AUTOMATICAMENTE após a criação/instanciação de um objeto a partir desta classe 
@@ -28,29 +32,7 @@ abstract class Titulo implements Avaliavel
     * agora meu atributo $genero é do tipo "Genero", assim passarei um valor do mesmo tipo para ele durante a instanciação do objeto no escopo global do sistema
     *essas anotações acima estavem em "filme" porém a regra das coisas veio para cá, logo, os comentários também
     */
-    public function __construct(public readonly string $nome, public readonly int $anoLancamento, public readonly Genero $genero)
-    {
-        $this->notas = [];
-    }
-
-    // subrotina, pois não retorna nada, apenas realiza uma ação
-    // modificador de acesso public para dizer que nosso método pode ser acessado de fora do nosso Filme, ou seja fora da nossa classe Filme
-    public function avalia(float $nota): void
-    {
-        // para executar/chamar os métodos funções (serão chamados a partir de um objeto que instanciou esta classe), eu preciso especificar que estou chamando o atributo publico "$notas" do objeto que CHAMOU essa função, caso no meu objeto "$filme20" eu chame $filme20->avalia(10), dentro do método eu preciso estar especificando que, estou chamando o atributo $notas exatamente responsavel pelo $filme 20, se não, me gerará um erro e não conseguirei prosseguir com a execuçaõ do programa
-        // devido a isso, é utilizado o "$this" antes de chamar os atributos da classe, pois os métodos/funções não o reconhecem, o atributos definidos fora do método não enxergam os atributos da minha classe sem a palavra $this antes do atributo em si
-        // $this = esse (use o atributo para esse objeto que chamou a função)
-        // $this = palavra reservada que indica o objeto utilizado para executar a função
-        $this->notas[] = $nota;
-    }
-
-    public function media(): float
-    {
-        $somaNotas = array_sum($this->notas);
-        // count conta a quantidade de itens dentro do array
-        $quantidadeNotas = count($this->notas);
-        return $somaNotas / $quantidadeNotas;
-    }
+    public function __construct(public readonly string $nome, public readonly int $anoLancamento, public readonly Genero $genero) {}
 
     // método abstrato (permitido apenas em classes abstratas, ou seja, classes que não podem ser instanciadas diretamente, apenas herdadas por outras classes) pois todas as classes filhas tem que ter este método (filme,série...) porém cada uma tem um jeito diferente de implementar este método, ou seja, o método, no MOMENTO atual não sabe sua forma, ele apenas terá uma no momento em que ele + seu corpo forem definidos em uma classe filha/subclasse que herdou da classe abstrata atual (Titulo), por isso é um método abstrato, ele terá diferentes formas (terá comportamentos diferentes) dependendo de qual classe filha for utiliza-lo
     // este método ainda é abstrato, ele (neste momento) ainda não tem uma implementação, quem for especializar a classe titulo (serie, filme, até mesmo mini-serie) ai sim precisará definir uma implementação para este método
