@@ -7,7 +7,7 @@ class ContaCorrenteTb extends ContaBancariaTb
 
     public function __construct(ClienteTb $cliente, float $saldo)
     {
-        parent::__construct($cliente, $saldo);
+        parent::__construct($cliente, $saldo, TipoContaTb::Corrente);
     }
 
     public function sacar(float $valor): bool

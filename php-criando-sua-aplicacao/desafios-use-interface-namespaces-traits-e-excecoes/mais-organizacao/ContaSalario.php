@@ -5,7 +5,7 @@ class ContaSalario extends ContaBancariaTb
 {
     public function __construct(ClienteTb $cliente, float $saldo)
     {
-        parent::__construct($cliente, $saldo);
+        parent::__construct($cliente, $saldo, TipoContaTb::Salario);
     }
 
     // não possui taxa
