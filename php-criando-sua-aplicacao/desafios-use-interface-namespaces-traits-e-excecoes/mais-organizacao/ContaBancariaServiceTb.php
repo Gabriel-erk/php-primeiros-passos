@@ -24,7 +24,7 @@ class ContaBancariaServiceTb
 
     public function verSaldo(ContaBancariaTb $conta): string
     {
-        return "O saldo atual da conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} é de R$ {$conta->saldo}.";
+        return "O saldo atual da conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} é de R$ {$conta->getSaldo()}.";
     }
 
     public function desativar(ContaBancariaTb $conta): string
