@@ -43,4 +43,47 @@ foreach ($contas as $conta) {
 }
 
 echo "--- TESTES SAQUE ---" . PHP_EOL;
+// testando regras em comum de cada conta
+
+// 1 - sacar valor igual a zero
+foreach ($contas as $conta) {
+    echo $contaBancariaServiceTb->sacar($conta, 0) . PHP_EOL;
+}
+
+echo "\n";
+
+// 2 - valor maior que o saldo em conta
+foreach ($contas as $conta) {
+    // armazenando um valor maior que o saldo para tentar saca-lo em cada conta
+    $valorMaiorQueSaldo = $contaBancariaServiceTb->saldo($conta) + 1;
+    echo $contaBancariaServiceTb->sacar($conta, $valorMaiorQueSaldo) . PHP_EOL;
+}
+
+echo "\n";
+
+// 3 - saque com conta inativa (sim, vai ter msg pra cacete)
+foreach ($contas as $conta) {
+    if ($conta->tipoConta == TipoContaTb::Poupanca || $conta->tipoConta == TipoContaTb::Salario) {
+        $saldoAtual = $contaBancariaServiceTb->saldo($conta);
+
+        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual), PHP_EOL;
+        echo $contaBancariaServiceTb->saldo($conta) . PHP_EOL;
+    } else {
+        // coloquei como maior que um pois tava indo pra uns tipos de 0 muito loucos
+        while ($contaBancariaServiceTb->saldo($conta) > 1) {
+            if ($contaBancariaServiceTb->saldo($conta) > 10000) {
+                echo $contaBancariaServiceTb->sacar($conta, 10000) . PHP_EOL;
+                echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',' , '.') . PHP_EOL;
+            } else {
+                $saldoContaCorrente = $contaBancariaServiceTb->saldo($conta);
+                $taxa_saque_conta_corrente = $contaBancariaServiceTb->saldo($conta) * 0.05;
+                $saldoAremoverContaCorrente = $saldoContaCorrente - $taxa_saque_conta_corrente;
+                echo $contaBancariaServiceTb->sacar($conta, $saldoAremoverContaCorrente) . PHP_EOL;
+                echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',' , '.') . PHP_EOL;
+            }
+        }
+    }
+}
+
+
 

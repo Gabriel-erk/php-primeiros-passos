@@ -13,18 +13,24 @@ class ContaBancariaServiceTb
 
     public function sacar(ContaBancariaTb $conta, float $valor): string
     {
+        // apliquei um if para mostrar uma mensagem mais específica para o usuário quando for conta corrente para ele ter noção que foi descontado 5% de taxa, porém voce disse sem if por tipo de conta, seria errado?
         if ($conta->sacar($valor) && $conta->tipoConta == TipoContaTb::Corrente) {
             return "Saque na conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} realizado com sucesso! (com taxa de 5% aplicada)";
         } else if ($conta->sacar($valor)) {
             return "Saque na conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} realizado com sucesso!";
         } else {
-            return "Saque na conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome}não foi efetuado, verificar se conta está ativa ou valor é válido.";
+            return "Saque na conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} não foi efetuado, verificar se conta está ativa ou valor é válido.";
         }
     }
 
     public function verSaldo(ContaBancariaTb $conta): string
     {
         return "O saldo atual da conta {$conta->tipoConta->name} do cliente {$conta->cliente->nome} é de R$ {$conta->getSaldo()}.";
+    }
+
+    // método para facilitar meus testes no index.php
+    public function saldo(ContaBancariaTb $conta): float {
+        return $conta->getSaldo();
     }
 
     public function desativar(ContaBancariaTb $conta): string
