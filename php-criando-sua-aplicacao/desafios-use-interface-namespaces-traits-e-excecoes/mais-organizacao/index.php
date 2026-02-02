@@ -61,29 +61,34 @@ foreach ($contas as $conta) {
 
 echo "\n";
 
+// echo $contaBancariaServiceTb->sacar($contaCorrente, 10000) . PHP_EOL;
+// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
+// echo $contaBancariaServiceTb->sacar($contaCorrente, 10000) . PHP_EOL;
+// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
+// echo $contaBancariaServiceTb->sacar($contaCorrente, 5910.1875) . PHP_EOL;
+// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
+
+
 // 3 - saque com conta inativa (sim, vai ter msg pra cacete)
 foreach ($contas as $conta) {
-    if ($conta->tipoConta == TipoContaTb::Poupanca || $conta->tipoConta == TipoContaTb::Salario) {
-        $saldoAtual = $contaBancariaServiceTb->saldo($conta);
-
-        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual), PHP_EOL;
-        echo $contaBancariaServiceTb->saldo($conta) . PHP_EOL;
-    } else {
+    if ($conta->tipoConta == TipoContaTb::Corrente) {
         // coloquei como maior que um pois tava indo pra uns tipos de 0 muito loucos
-        while ($contaBancariaServiceTb->saldo($conta) > 1) {
+        while ($contaBancariaServiceTb->saldo($conta) > 0) {
             if ($contaBancariaServiceTb->saldo($conta) > 10000) {
                 echo $contaBancariaServiceTb->sacar($conta, 10000) . PHP_EOL;
-                echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',' , '.') . PHP_EOL;
+                echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',', '.') . PHP_EOL;
             } else {
                 $saldoContaCorrente = $contaBancariaServiceTb->saldo($conta);
                 $taxa_saque_conta_corrente = $contaBancariaServiceTb->saldo($conta) * 0.05;
                 $saldoAremoverContaCorrente = $saldoContaCorrente - $taxa_saque_conta_corrente;
                 echo $contaBancariaServiceTb->sacar($conta, $saldoAremoverContaCorrente) . PHP_EOL;
-                echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',' , '.') . PHP_EOL;
+                echo $contaBancariaServiceTb->saldo($conta) . PHP_EOL;
             }
         }
+    } else {
+        $saldoAtual = $contaBancariaServiceTb->saldo($conta);
+
+        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual), PHP_EOL;
+        echo $contaBancariaServiceTb->saldo($conta) . PHP_EOL;
     }
 }
-
-
-
