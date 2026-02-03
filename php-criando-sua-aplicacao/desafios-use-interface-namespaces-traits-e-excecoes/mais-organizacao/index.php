@@ -63,15 +63,6 @@ foreach ($contas as $conta) {
 
 echo "\n";
 
-// echo $contaBancariaServiceTb->sacar($contaCorrente, 10000) . PHP_EOL;
-// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
-// echo $contaBancariaServiceTb->sacar($contaCorrente, 10000) . PHP_EOL;
-// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
-// echo $contaBancariaServiceTb->sacar($contaCorrente, 5910.1875) . PHP_EOL;
-// echo $contaBancariaServiceTb->saldo($contaCorrente) . PHP_EOL;
-
-// echo $contaBancariaServiceTb->verSaldo($contaPoupanca) . PHP_EOL;
-// echo $contaBancariaServiceTb->verSaldo($contaSalario) . PHP_EOL;
 // 3 - saque com conta inativa (sim, vai ter msg pra cacete)
 foreach ($contas as $conta) {
     if ($conta->tipoConta == TipoContaTb::Corrente) {
@@ -90,8 +81,7 @@ foreach ($contas as $conta) {
         }
     } else {
         $saldoAtual = $contaBancariaServiceTb->saldo($conta);
-        var_dump($saldoAtual);
-        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual), PHP_EOL;
+        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual). PHP_EOL;
         echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
     }
 }
