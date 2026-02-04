@@ -14,8 +14,8 @@ class ContaCorrenteTb extends ContaBancariaTb
 
     public function sacar(float $valor): bool
     {
-        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor) && $valor <= $this->saldo + $this->saldo * self::TAXA_SAQUE_TB && $valor <= self::LIMITE_SAQUE_PADRAO_TB) {
-            $this->saldo -= $valor + $this->saldo * self::TAXA_SAQUE_TB;
+        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor) && $valor <= $valor + $valor * self::TAXA_SAQUE_TB && $valor <= self::LIMITE_SAQUE_PADRAO_TB) {
+            $this->saldo -= $valor + $valor * self::TAXA_SAQUE_TB;
             return true;
         } else {
             return false;
