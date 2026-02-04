@@ -81,7 +81,7 @@ foreach ($contas as $conta) {
                 $taxaSaqueIndexTb = $saldoAtualContaCorrente * 0.05; // taxa de 5%
                 $saldoAtualContaCorrente -= $taxaSaqueIndexTb; // subtraindo o valor da taxa do saldo atual
                 var_dump($saldoAtualContaCorrente);
-                echo $contaBancariaServiceTb->sacar($conta, 8975) . PHP_EOL;
+                echo $contaBancariaServiceTb->sacar($conta, $saldoAtualContaCorrente) . PHP_EOL;
                 echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
             }
         }

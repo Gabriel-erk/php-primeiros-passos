@@ -16,8 +16,9 @@ class ContaCorrenteTb extends ContaBancariaTb
     {
         $taxaTotal = $valor * self::TAXA_SAQUE_TB;
         // problema deve estar aqui: $valor <= $valor + $taxaTotal
-        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor) && $valor <= $valor + $taxaTotal && $valor <= self::LIMITE_SAQUE_PADRAO_TB) {
-            $this->saldo -= $valor + ($valor * self::TAXA_SAQUE_TB);
+        // $this->saldo <= $valor + $taxaTotal, caso valor + taxaTotal forem maiores que o saldo, eu não posso sacar, pois será um valor maior que o que eu tenho disponível, logo, o que eu devo fazer é que o saque só seja possível SE o saldo disponivel for menor ou igual ao $valor (a ser sacado) + taxa de 5%
+        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor) && $this->saldo <= $valor + $taxaTotal && $valor <= self::LIMITE_SAQUE_PADRAO_TB) {
+            $this->saldo -= $valor + $taxaTotal;
             return true;
         } else {
             return false;
