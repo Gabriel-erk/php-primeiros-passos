@@ -75,11 +75,12 @@ foreach ($contas as $conta) {
                 echo $contaBancariaServiceTb->sacar($conta, 10000) . PHP_EOL;
                 echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',', '.') . PHP_EOL;
             } else {
-                $saldoContaCorrente = $contaBancariaServiceTb->saldo($conta);
-                $taxa_saque_conta_corrente = $contaBancariaServiceTb->saldo($conta) * 0.05;
-                $saldoAremoverContaCorrente = $saldoContaCorrente - $taxa_saque_conta_corrente;
-                echo $contaBancariaServiceTb->sacar($conta, $saldoAremoverContaCorrente) . PHP_EOL;
-                echo $contaBancariaServiceTb->saldo($conta) . PHP_EOL;
+                // quando o programa chegar até aqui, signicifa que o saldo já é menor que 10000 e posso remove-lo por completo apenas com um único saque, logo, o que preciso fazer é: pegar o saldo restante (pois é o total que quero remover) depois, caso tente sacar apenas assim, não irá funcionar, pois para sacar, não posso escolher o valor cheio, já que para o saque, uma das condições é que o valor a se remover seja menor ou igual a aquele mesmo valor + 5% dele mesmo, então, preciso pegar 5% desse valor, 
+                $saldoAtualContaCorrente = $contaBancariaServiceTb->saldo($conta); // pegando o valor total da conta, o valor que quero remover de fato
+                $taxaSaqueIndexTb = $saldoAtualContaCorrente * 0.05; // taxa de 5%
+                $saldoAtualContaCorrente -= $taxaSaqueIndexTb; // subtraindo o valor da taxa do saldo atual
+                var_dump($saldoAtualContaCorrente);
+                echo $contaBancariaServiceTb->sacar($conta, $saldoAtualContaCorrente) . PHP_EOL;
             }
         }
     } else {
