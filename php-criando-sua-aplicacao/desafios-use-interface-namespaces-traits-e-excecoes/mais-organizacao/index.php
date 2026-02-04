@@ -93,4 +93,4 @@ foreach ($contas as $conta) {
     echo "\n";
 }
 
-// 4 - trait está sendo reutilizada
+// trait está sendo reutilizada nas classes de contas bancárias
