@@ -31,7 +31,7 @@ class ContaSalario extends ContaBancariaTb
 
     public function depositarSalario(float $valor): bool
     {
-        if ($this->ativa && $valor > 0) {
+        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor)) {
             $this->saldo += $valor;
             return true;
         } else {

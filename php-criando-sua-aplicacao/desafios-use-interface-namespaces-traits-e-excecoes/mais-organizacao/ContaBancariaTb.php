@@ -19,7 +19,7 @@ abstract class ContaBancariaTb implements OperacoesBancariasTb
 
     public function desativar(): bool
     {
-        if ($this->ativa && $this->saldo <= 0) {
+        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($this->saldo)) {
             $this->ativa = false;
             return true;
         } else {
@@ -29,7 +29,7 @@ abstract class ContaBancariaTb implements OperacoesBancariasTb
 
     public function depositar(float $valor): bool
     {
-        if ($this->ativa && $valor > 0) {
+        if ($this->validarContaAtiva($this->ativa) && $this->validarValorPositivo($valor)) {
             $this->saldo += $valor;
             return true;
         } else {

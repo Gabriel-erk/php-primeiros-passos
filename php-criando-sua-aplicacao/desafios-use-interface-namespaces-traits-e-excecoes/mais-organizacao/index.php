@@ -64,6 +64,9 @@ foreach ($contas as $conta) {
 echo "\n";
 
 // 3 - saque com conta inativa (sim, vai ter msg pra cacete)
+// saque respeita regras de saque de cada conta
+// desativar conta impede operações
+// interface esta sendo respeitada pois todas as contas possuem o método depositar e sacar
 foreach ($contas as $conta) {
     if ($conta->tipoConta == TipoContaTb::Corrente) {
         // coloquei como maior que um pois tava indo pra uns tipos de 0 muito loucos
@@ -84,6 +87,10 @@ foreach ($contas as $conta) {
         echo $contaBancariaServiceTb->sacar($conta, $saldoAtual). PHP_EOL;
         echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
     }
+    echo $contaBancariaServiceTb->desativar($conta) . PHP_EOL;
+    echo $contaBancariaServiceTb->sacar($conta, 10) . PHP_EOL;
+    echo $contaBancariaServiceTb->depositar($conta, 20) . PHP_EOL;
+    echo "\n";
 }
 
-// var_dump($contas);
+// 4 - trait está sendo reutilizada
