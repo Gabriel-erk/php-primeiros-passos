@@ -9,7 +9,7 @@ class ContaCorrenteTb extends ContaBancariaTb
     public function __construct(ClienteTb $cliente, float $saldo)
     {
         parent::__construct($cliente, $saldo, TipoContaTb::Corrente);
-        $this->limiteDisponivel = $this->saldo + 300;
+        $this->limiteDisponivel = 300;
     }
 
     public function sacar(float $valor): bool
@@ -24,8 +24,16 @@ class ContaCorrenteTb extends ContaBancariaTb
             $this->saldo >= $valor + $taxaTotal &&
             $valor <= self::LIMITE_SAQUE_PADRAO_TB
         ) {
-            $this->saldo -= $valor + $taxaTotal;
-            return true;
+            if (
+                $this->saldo <= 0 &&
+                $this->limiteDisponivel >= $valor + $taxaTotal
+            ) {
+                $this->limiteDisponivel -= $valor + $taxaTotal;
+                return true;
+            } else {
+                $this->saldo -= $valor + $taxaTotal;
+                return true;
+            }
         } else {
             return false;
         }
