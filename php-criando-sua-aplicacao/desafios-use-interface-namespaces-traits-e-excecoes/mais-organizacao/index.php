@@ -24,7 +24,7 @@ $contas = [
     $contaSalario = new ContaSalario($clienteTres, 25000)
 ];
 
-var_dump($contas);
+// var_dump($contas);
 
 // percorrendo com foreach e chamando sacar(500) em todas
 foreach ($contas as $conta) {
@@ -70,18 +70,17 @@ echo "\n";
 foreach ($contas as $conta) {
     if ($conta->tipoConta == TipoContaTb::Corrente) {
         // coloquei como maior que um pois tava indo pra uns tipos de 0 muito loucos
-        while ($contaBancariaServiceTb->saldo($conta) >= 0) {
+        // antes estava >= 0 - porém, se for igual a zero, por que continuar o loop? erro de lógica isso
+        while ($contaBancariaServiceTb->saldo($conta) > 0) {
             if ($contaBancariaServiceTb->saldo($conta) > 10000) {
+                // obs: caso sacar retornar false, virará um loop ifinito, ideal seria parar o loop em caso isso acontecer para tratar da melhor forma
                 echo $contaBancariaServiceTb->sacar($conta, 10000) . PHP_EOL;
                 echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',', '.') . PHP_EOL;
             } else {
-                // quando o programa chegar até aqui, signicifa que o saldo já é menor que 10000 e posso remove-lo por completo apenas com um único saque, logo, o que preciso fazer é: pegar o saldo restante (pois é o total que quero remover) depois, caso tente sacar apenas assim, não irá funcionar, pois para sacar, não posso escolher o valor cheio, já que para o saque, uma das condições é que o valor a se remover seja menor ou igual a aquele mesmo valor + 5% dele mesmo, então, preciso pegar 5% desse valor, 
+                // quando o programa chegar até aqui, signicifa que o saldo já é menor que 10000 e posso remove-lo por completo apenas com um único saque, logo, o que preciso fazer é: pegar o saldo restante, pois é a base do cálculo que irei realizar para remover tudo, depois eu me faço a pergunta, que numero que, quando eu aumentar 500, vai dar exatamente o saldo que quero tirar? (ou seja, para tirar o valor inteiro da conta?), nesse caso, eu divido o meu saldo atual por 105% (1.05), descobrindo o valor ANTES do aumento de 5% de quando eu acionar meu método sacar, assim, quando eu chamar este método, aumentará 5% do valor que estou pedindo para sacar, atingindo o total que a conta possui, tirando tudo de uma única vez (mais um erro de lógica)
                 $saldoAtualContaCorrente = $contaBancariaServiceTb->saldo($conta); // pegando o valor total da conta, o valor que quero remover de fato
-                var_dump($saldoAtualContaCorrente);
-                $taxaSaqueIndexTb = $saldoAtualContaCorrente * 0.05; // taxa de 5%
-                $saldoAtualContaCorrente -= $taxaSaqueIndexTb; // subtraindo o valor da taxa do saldo atual
-                var_dump($saldoAtualContaCorrente);
-                echo $contaBancariaServiceTb->sacar($conta, $saldoAtualContaCorrente) . PHP_EOL;
+                $valor = $saldoAtualContaCorrente / 1.05; 
+                echo $contaBancariaServiceTb->sacar($conta, $valor) . PHP_EOL;
                 echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
             }
         }
