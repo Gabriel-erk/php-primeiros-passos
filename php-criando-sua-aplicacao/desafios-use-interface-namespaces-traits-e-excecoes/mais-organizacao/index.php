@@ -21,7 +21,7 @@ $clienteTres = new ClienteTb("Mike Swentchzel", "563.423.245-56");
 $contas = [
     $contaCorrente = new ContaCorrenteTb($clienteUm, 30000),
     $contaPoupanca = new ContaPoupancaTb($clienteDois, 20000),
-    $contaSalario = new ContaSalario($clienteTres, 25000)
+    $contaSalario = new ContaSalarioTb($clienteTres, 25000)
 ];
 
 // var_dump($contas);

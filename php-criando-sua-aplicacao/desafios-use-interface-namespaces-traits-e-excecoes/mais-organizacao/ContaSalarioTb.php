@@ -1,7 +1,7 @@
 <?php
 
 // não é possível depositar nessa conta
-class ContaSalario extends ContaBancariaTb
+class ContaSalarioTb extends ContaBancariaTb
 {
     public function __construct(ClienteTb $cliente, float $saldo)
     {
