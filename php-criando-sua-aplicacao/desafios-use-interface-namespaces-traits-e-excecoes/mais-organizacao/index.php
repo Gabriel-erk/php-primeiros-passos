@@ -70,7 +70,7 @@ echo "\n";
 foreach ($contas as $conta) {
     if ($conta->tipoConta == TipoContaTb::Corrente) {
         // coloquei como maior que um pois tava indo pra uns tipos de 0 muito loucos
-        while ($contaBancariaServiceTb->saldo($conta) > 0) {
+        while ($contaBancariaServiceTb->saldo($conta) >= 0) {
             if ($contaBancariaServiceTb->saldo($conta) > 10000) {
                 echo $contaBancariaServiceTb->sacar($conta, 10000) . PHP_EOL;
                 echo number_format($contaBancariaServiceTb->saldo($conta), 2, ',', '.') . PHP_EOL;
