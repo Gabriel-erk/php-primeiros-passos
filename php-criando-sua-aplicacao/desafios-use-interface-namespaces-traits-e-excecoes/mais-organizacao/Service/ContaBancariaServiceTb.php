@@ -1,4 +1,8 @@
 <?php
+namespace MaisOrganizacao\Service;
+
+use MaisOrganizacao\Model\ContaBancariaTb;
+use MaisOrganizacao\Model\TipoContaTb;
 
 class ContaBancariaServiceTb
 {

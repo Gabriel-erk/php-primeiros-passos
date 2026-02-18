@@ -1,4 +1,7 @@
 <?php
+namespace MaisOrganizacao\Model;
+
+use MaisOrganizacao\Model\Trait\ValidacaoFinanceiraTb;
 
 // não é possível depositar nessa conta
 class ContaSalarioTb extends ContaBancariaTb

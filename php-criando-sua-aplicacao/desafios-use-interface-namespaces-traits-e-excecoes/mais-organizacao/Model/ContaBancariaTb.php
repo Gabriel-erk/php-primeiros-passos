@@ -1,4 +1,7 @@
 <?php
+namespace MaisOrganizacao\Model;
+
+use MaisOrganizacao\Model\Trait\ValidacaoFinanceiraTb;
 
 abstract class ContaBancariaTb implements OperacoesBancariasTb
 {

@@ -1,4 +1,7 @@
 <?php
+namespace MaisOrganizacao\Model;
+
+use MaisOrganizacao\Model\Trait\ValidacaoFinanceiraTb;
 
 class ContaPoupancaTb extends ContaBancariaTb
 {

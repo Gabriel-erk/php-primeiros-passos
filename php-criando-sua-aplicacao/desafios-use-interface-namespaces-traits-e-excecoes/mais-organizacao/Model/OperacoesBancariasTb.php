@@ -1,4 +1,5 @@
 <?php
+namespace MaisOrganizacao\Model;
 
 interface OperacoesBancariasTb
 {

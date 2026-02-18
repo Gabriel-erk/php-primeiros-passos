@@ -10,6 +10,16 @@ require_once __DIR__ . '/ContaCorrenteTb.php';
 require_once __DIR__ . '/ContaPoupancaTb.php';
 require_once __DIR__ . '/ContaSalarioTb.php';
 
+use MaisOrganizacao\Model\{
+    ClienteTb,
+    ContaCorrenteTb,
+    ContaPoupancaTb,
+    ContaSalarioTb,
+    TipoContaTb
+};
+// como é apenas um que vou trazer do service, não há necessidade de usar as {}
+use MaisOrganizacao\Service\ContaBancariaServiceTb;
+
 $contaBancariaServiceTb = new ContaBancariaServiceTb();
 
 // criando 3 cliente
@@ -79,14 +89,14 @@ foreach ($contas as $conta) {
             } else {
                 // quando o programa chegar até aqui, signicifa que o saldo já é menor que 10000 e posso remove-lo por completo apenas com um único saque, logo, o que preciso fazer é: pegar o saldo restante, pois é a base do cálculo que irei realizar para remover tudo, depois eu me faço a pergunta, que numero que, quando eu aumentar 500, vai dar exatamente o saldo que quero tirar? (ou seja, para tirar o valor inteiro da conta?), nesse caso, eu divido o meu saldo atual por 105% (1.05), descobrindo o valor ANTES do aumento de 5% de quando eu acionar meu método sacar, assim, quando eu chamar este método, aumentará 5% do valor que estou pedindo para sacar, atingindo o total que a conta possui, tirando tudo de uma única vez (mais um erro de lógica)
                 $saldoAtualContaCorrente = $contaBancariaServiceTb->saldo($conta); // pegando o valor total da conta, o valor que quero remover de fato
-                $valor = $saldoAtualContaCorrente / 1.05; 
+                $valor = $saldoAtualContaCorrente / 1.05;
                 echo $contaBancariaServiceTb->sacar($conta, $valor) . PHP_EOL;
                 echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
             }
         }
     } else {
         $saldoAtual = $contaBancariaServiceTb->saldo($conta);
-        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual). PHP_EOL;
+        echo $contaBancariaServiceTb->sacar($conta, $saldoAtual) . PHP_EOL;
         echo $contaBancariaServiceTb->verSaldo($conta) . PHP_EOL;
     }
     echo $contaBancariaServiceTb->desativar($conta) . PHP_EOL;
