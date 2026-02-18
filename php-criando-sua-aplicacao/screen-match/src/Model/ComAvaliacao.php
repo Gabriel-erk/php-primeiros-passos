@@ -1,4 +1,5 @@
 <?php
+namespace ScreenMatch\Model;
 
 // trait vai permitir que separemos um espaço do nosso código principal para chamar outro código (como se fosse o nosso require, que por debaixo dos panos pega e "cola" no arquivo que chamamos o require o arquivo indicado pelo mesmo) 
 // palavra reservada trait nada mais é do que uma "característica de uma classe", nesse caso a nossa trait vai ser uma "característica de uma classe que possui avaliação"

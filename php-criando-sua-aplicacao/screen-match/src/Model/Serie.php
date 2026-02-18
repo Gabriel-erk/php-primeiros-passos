@@ -1,4 +1,5 @@
 <?php 
+namespace ScreenMatch\Model;
 
 // é possível implementar mais de uma interface separando por vírgula
 class Serie extends Titulo 

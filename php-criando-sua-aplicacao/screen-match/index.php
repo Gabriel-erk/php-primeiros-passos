@@ -9,6 +9,16 @@ require_once __DIR__ . "/src/Model/Episodio.php";
 require_once __DIR__ . "/src/Calculos/CalculadoraDeMaratona.php";
 require_once __DIR__ . "/src/Calculos/ConversorNotaEstrela.php";
 
+/* 
+* trazendo as classes/arquivos do meu namespace Model, onde posso trazer todos de uma vez com esse caminho use ScreenMatch\Model\{ classes que quero trazer aqui separadas por ","}
+* outra forma de fazer também seria: use ScreenMatch\Model\Filme e etc, mas ai vai de gosto
+*/
+use ScreenMatch\Model\{
+    Filme, Serie, Genero, Episodio 
+};
+use ScreenMatch\Calculos\{
+    CalculadoraDeMaratona, ConversorNotaEstrela
+};
 echo "Bem-vindo(a) ao ScreenMatch" . PHP_EOL;
 // objeto da classe filme
 // sintaxe para utilizar o tipo (enum) Genero é chamar o enum "Genero::umDosCasosPossiveisAqui", como abaixo, coloquei o valor correspondente ao case "SuperHeroi", mas poderia ser acao etc

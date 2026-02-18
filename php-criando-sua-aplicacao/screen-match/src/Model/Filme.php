@@ -1,4 +1,5 @@
 <?php
+namespace ScreenMatch\Model;
 
 // definindo um modelo/molde/template dizendo o que todo filme precisa ter
 // cada filme instanciado vai ter suas prórpiras características, porém, seguindo este padrão/modelo de construção
