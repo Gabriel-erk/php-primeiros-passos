@@ -3,6 +3,7 @@
 // namespace do que eu definir neste arquivo é: "ScreenMatch\Model"
 // contra barra "\" é como separamos/organiza diversos namespace, aqui, tenho um namespace "ScreenMatch\Modelo", por padrão teremos um namespace global, no caso "ScreenMatch\" e dentro de cada pasta que organizamos nosso projeto, teremos um namespace, como no caso abaixo: "Model" - pode-se colcoar qualquer nome, mas como boa prática, colocamos o nome das "pastas atuais" mesmo, mapeando da mesma forma que temos nossa estrutura de pastas
 // nesse primeiro momento estou sendo retornado com vários erros neste arquivo pois ao definir um namespace, tudo que irei buscar será procurado nele (coisa que não estou achando no momento, como a interface Avaliavel e a trait ComAvaliacao, que no momento não se encontram no namespace definido "ScreenMatch/Model", mesma coisa para o Enum "Genero", ele busca esses arquivos externos no namespace, apenas nele (caso claro, em uma situação como essa que não estamos trazendo nenhum outro namespace)) - classes também podem ser chamadas de "símbolos"
+// não é obrigatório que os namespaces estejam em outras pastas (como por exemplo, eu poderia ter um namespace na pasta raiz(junto do index) que representasse algo no meu sistema (model) e colcoar um namespace lá e chama-lo no index, posso sim fazer isso, mas como boa prática, nossos namespaces ficam em pastas separadas, permitindo que fiquem mais organizados e legíveis)
 namespace ScreenMatch\Model;
 
 /**
