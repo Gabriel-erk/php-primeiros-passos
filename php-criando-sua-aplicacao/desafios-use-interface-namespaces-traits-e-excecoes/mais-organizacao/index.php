@@ -1,14 +1,6 @@
 <?php
 
-require_once __DIR__ . '/ClienteTb.php';
-require_once __DIR__ . '/OperacoesBancariasTb.php';
-require_once __DIR__ . '/ValidacaoFinanceiraTb.php';
-require_once __DIR__ . '/TipoContaTb.php';
-require_once __DIR__ . '/ContaBancariaTb.php';
-require_once __DIR__ . '/ContaBancariaServiceTb.php';
-require_once __DIR__ . '/ContaCorrenteTb.php';
-require_once __DIR__ . '/ContaPoupancaTb.php';
-require_once __DIR__ . '/ContaSalarioTb.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . "autoload.php";
 
 use MaisOrganizacao\Model\{
     ClienteTb,
