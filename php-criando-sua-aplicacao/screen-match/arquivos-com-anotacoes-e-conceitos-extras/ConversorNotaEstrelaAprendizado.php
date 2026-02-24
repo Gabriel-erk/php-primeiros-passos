@@ -6,7 +6,6 @@ namespace ScreenMatch\Calculos;
 
 use DivisionByZeroError;
 use ScreenMatch\Model\Avaliavel;
-use Throwable;
 
 class ConversorNotaEstrela
 {
@@ -27,8 +26,7 @@ class ConversorNotaEstrela
         * 1 - podemos ter vários catch, tratando diferentes erros - feito quando o tratamenteo de 2 ou mais erros não são iguais, onde faremos mais de um catch para trata-lo da forma que o erro precisa
         * 2 - podemos tratar vários erros no mesmo catch - geralmente feito quando o tratamento dos 2 pode ser igual
         * 3 - existe uma hierarquia quando falamos de erros e exceções, todos os erros e exceções IMPLEMENTAM a interface "Throwable", ou seja, ao invés de "nichar/especificar" o tipo do erro que queremos pegar, podemos simplesmente pegar qualquer erro ou exceção que aconteça, usando a interface "Throwable" como tipo do parâmetro do nosso catch, ou seja, catch (Throwable $e) { // código para tratar o erro }, isso é útil quando queremos tratar de forma genérica, ou seja, independente do tipo do erro que aconteça, queremos apenas tratar de uma forma genérica (permitindo que possamos pegar QUALQUER tipo de erro e exceção, pois ambos implementam a interface "Throwable"), como por exemplo, imprimir a mensagem de erro e retornar 0, ou seja, independente do tipo do erro que aconteça, queremos apenas imprimir a mensagem de erro e retornar 0 - nesse caso como DivisionByZeroError extende da classe "Error", ou seja, ele também É um ERRO, o tipo no parâmetro também poderia ser "Error" que funcionaria normalmente - agora colocando Exception, o catch nunca seria lido, pois o erro que estamos tendo não é desse tipo, logo, "ninguém" saberia trata-lo e a stack trace seria jogada no nosso terminal, mostrando que o erro DivisionByZeroError não foi pego (Uncaught)
-        */
-        catch (Throwable $e) {
+        */ catch (DivisionByZeroError $e) {
             // todas as classes de erros "são também do tipo" Throwable (implementam ele (pois é uma interface), vi ao passar o mouse em cima do método getMessage), e os objetos instanciados a partir desse tipo de classe tem acesso a esse método "getMessage" que irá nos permitir ter acesso a mensagem de erro que tivemos
             // aqui, através do echo (necesário para imprimir algo na "tela"/"terminal") estamos exibindo a mensagem de erro e logo após retornando 0, encerrando a execução do método converte (encerrando a stack dele também)
             // no caso é como se fosse o "tipo do erro" ao invés de uma msg gigante sabe? então quando este erro acontecer ele irá imprimir no terminal apenas "Division by zero"
