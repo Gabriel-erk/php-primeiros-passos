@@ -1,5 +1,6 @@
 <?php
 namespace ScreenMatch\Model;
+use ScreenMatch\Exception\NotaInvalidaException;
 
 // trait vai permitir que separemos um espaço do nosso código principal para chamar outro código (como se fosse o nosso require, que por debaixo dos panos pega e "cola" no arquivo que chamamos o require o arquivo indicado pelo mesmo) 
 // palavra reservada trait nada mais é do que uma "característica de uma classe", nesse caso a nossa trait vai ser uma "característica de uma classe que possui avaliação"
@@ -16,9 +17,9 @@ trait ComAvaliacao
 
    // subrotina, pois não retorna nada, apenas realiza uma ação
     // modificador de acesso public para dizer que nosso método pode ser acessado de fora do nosso Filme, ou seja fora da nossa classe Filme
-    // comentário abaixo irá deixar explicito para quem for chamar este método que ele pode retornar uma exceção dizendo que ele LANÇA uma \InvalidArgumentException e logo após um comentário dizendo que isso acontece apenas se a nota for negativa ou maior que 10, coisa que será vista quando alguém passar o mouse em cima do método e etc
+    // comentário abaixo irá deixar explicito para quem for chamar este método que ele pode retornar uma exceção dizendo que ele LANÇA uma NotaInvalidaException e logo após um comentário dizendo que isso acontece apenas se a nota for negativa ou maior que 10, coisa que será vista quando alguém passar o mouse em cima do método e etc
     /**
-     * @throws \InvalidArgumentException Se a nota for negativa ou maior do que 10
+     * @throws NotaInvalidaException Se a nota for negativa ou maior do que 10
      */
     public function avalia(float $nota): void
     {
@@ -28,7 +29,8 @@ trait ComAvaliacao
             // estou sempre "jogando" (ou seja, após o throw) um objeto, no nosso caso, do tipo "InvalidArgumentException" (uma exceção de ARGUMENTO INVÁLIDO indicando que o argumento passado (parâmetro) não está no formato correto)
             // todos os Throwable esperam como parâmetro para o construtor, uma mensagem indicando o que foi que gerou aquele erro, no nosso caso, mostramos que a nota precisa ser entre 0 e 10 - logo, para quem tratar isso com um CATCH e utilizar o método getMessage, terá acesso a nossa mensagem que estamos passando por aqui: "Nota precisa ser entre 0 e 10", se não a mensagem será exibida na stack trace
             // caso caia dentro deste if, ao ler a linha 27 e jogar o erro, a execução será interrompida (não lerá mais nenhuma linha deste método)
-            throw new \InvalidArgumentException("Nota precisa ser entre 0 e 10", 1);  
+            // como mensagem a ser passada ao construtor de "NotaInvalidaException" é sempre a mesma, defino ela dentro da classe (NotaInvalidaException) reescrevendo o seu construtor deixando a mensagem "Nota precisa ser entre 0 e 10" por padrão
+            throw new NotaInvalidaException();  
         }
         // para executar/chamar os métodos funções (serão chamados a partir de um objeto que instanciou esta classe), eu preciso especificar que estou chamando o atributo publico "$notas" do objeto que CHAMOU essa função, caso no meu objeto "$filme20" eu chame $filme20->avalia(10), dentro do método eu preciso estar especificando que, estou chamando o atributo $notas exatamente responsavel pelo $filme 20, se não, me gerará um erro e não conseguirei prosseguir com a execuçaõ do programa
         // devido a isso, é utilizado o "$this" antes de chamar os atributos da classe, pois os métodos/funções não o reconhecem, o atributos definidos fora do método não enxergam os atributos da minha classe sem a palavra $this antes do atributo em si
