@@ -10,7 +10,8 @@ class Serie extends Titulo
     }
 
     // ATRIBUTO override que indica que estou sobreescrevendo um método
-    #[Override]
+    // \ para indicar que estamos buscando o atributo no namespace global do php
+    #[\Override]
     public function duracaoEmMinutos(): int
     {
         return $this->temporadas * $this->episodiosPorTemporada * $this->minutosPorEpisodio;

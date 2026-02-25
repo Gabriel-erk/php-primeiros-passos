@@ -60,3 +60,4 @@ echo "você tem " . $calculadora->getDuracao() . " minutos para maratonar" . PHP
 $conversorNotaEstrela = new ConversorNotaEstrela();
 echo $conversorNotaEstrela->converte($serie) . PHP_EOL;
 echo $conversorNotaEstrela->converte($filme);
+
