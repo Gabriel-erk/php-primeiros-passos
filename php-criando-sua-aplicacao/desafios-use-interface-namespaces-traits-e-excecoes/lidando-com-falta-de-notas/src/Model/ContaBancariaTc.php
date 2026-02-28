@@ -2,16 +2,14 @@
 
 namespace FaltaNotas\Model;
 // namespace das interfaces que usarei
-use FaltaNotas\Contracts\LogavelTc;
-use FaltaNotas\Contracts\OperacaoBancariaTc;
+use FaltaNotas\Contracts\{LogavelTc, OperacaoBancariaTc};
 // namespace dos enums
 use FaltaNotas\Enums\TipoContaTc;
-use FaltaNotas\Traits\IdentificadorTraitTc;
-use FaltaNotas\Traits\LoggerTraitTc;
+use FaltaNotas\Traits\{IdentificadorTraitTc, LoggerTraitTc};
 
 abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
 {
-    // usando as traits (não é necessário colocar o namespace completo e preciso chamar dentro do corpo da classe, como boa prática, antes do construtor e definição de propriedades)
+    // usando as traits (é necessário colocar o namespace completo e preciso chamar dentro do corpo da classe, como boa prática, antes do construtor e definição de propriedades)
     use IdentificadorTraitTc;
     use LoggerTraitTc;
 
