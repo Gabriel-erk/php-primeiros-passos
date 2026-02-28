@@ -44,6 +44,22 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     // cada conta implementa sua regra de saque, apenas tenho que garantir que este método irá existir em todas as classes filhas de ContaBancariaTc (por mais que na interface esteja que o método tem o modificador de acesso publico, aqui posso alterar para abstrato, não preciso de uma implementação de método de nenhuma das minhas interfaces pois este método é abstrato, o importante é a assinatura do método ser como a da interface (ex: sacar, parâmetros, retorno etc))
     abstract function sacar(float $valor): bool;
 
+    public function transferir(ContaBancariaTc $contaOrigem, ContaBancariaTc $contaDestino, float $valor): bool{
+        if (
+            $valor > 0 &&
+            $contaOrigem->ativa == true &&
+            $contaDestino->ativa == true
+        ) {
+            $contaOrigem->saldo -= $valor;
+            $contaDestino->saldo += $valor;
+            $this->log("Transferência de saldorealizada.");
+            return true;
+        } else {
+            $this->log("Tentativa de transferência de saldo fracassada.");
+            return false;
+        }
+    }
+
     public function desativar(): bool
     {
         if ($this->ativa) {
@@ -61,14 +77,14 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
         return $this->saldo;
     }
 
-    public function getCliente(): ClienteTc
+    public function getCliente(): string
     {
-        return $this->cliente;
+        return $this->cliente->nome;
     }
 
-    public function getTipo(): TipoContaTc
+    public function getTipo(): string
     {
-        return $this->tipoConta;
+        return $this->tipoConta->name;
     }
 
     public function getId(): int{
