@@ -10,7 +10,10 @@ class BancoServiceTc
     /** @var ContaBancariaTc */
     // comentário acima indica pra IDE que a propriedade $contas vai ter apenas objetos do tipo ContaBancariaTc
 
-    public function criarConta(ContaBancariaTc $conta): void {}
+    public function criarConta(ContaBancariaTc $conta): string {
+        $this->contas[] = $conta;
+        return "Conta criada com sucesso";
+    }
 
     public function depositar(ContaBancariaTc $conta, float $valor): string
     {
@@ -51,5 +54,13 @@ class BancoServiceTc
             echo "Saldo atual: " . $conta->getSaldo() . "\n";
             echo "============ \n";
         }
+    }
+
+    public function totalDinheiroBanco():string{
+        $somaDinheiroBanco = 0;
+        foreach ($this->contas as $conta) {
+            $somaDinheiroBanco += $conta->getSaldo();
+        }
+        return "Saldo total do banco no dia:" . date('d/m') . " é R\$ $somaDinheiroBanco";
     }
 }
