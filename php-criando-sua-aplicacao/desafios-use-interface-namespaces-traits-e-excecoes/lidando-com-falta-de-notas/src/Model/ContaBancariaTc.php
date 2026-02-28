@@ -6,14 +6,21 @@ use FaltaNotas\Contracts\LogavelTc;
 use FaltaNotas\Contracts\OperacaoBancariaTc;
 // namespace dos enums
 use FaltaNotas\Enums\TipoContaTc;
-// namespace das traits
-use FaltaNotas\Traits\LoggerTraitTc;
 use FaltaNotas\Traits\IdentificadorTraitTc;
+use FaltaNotas\Traits\LoggerTraitTc;
 
 abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
 {
+    // usando as traits (não é necessário colocar o namespace completo e preciso chamar dentro do corpo da classe, como boa prática, antes do construtor e definição de propriedades)
+    use IdentificadorTraitTc;
+    use LoggerTraitTc;
+
+    private int $idConta;
     // Classe ClienteTc está no namespace FaltaNotas\Model TAMBÉM então não precisa de use
-    public function __construct(protected ClienteTc $cliente, protected float $saldo, protected bool $ativa, protected TipoContaTc $tipoConta) {}
+    public function __construct(protected ClienteTc $cliente, protected float $saldo, protected bool $ativa, protected TipoContaTc $tipoConta)
+    {
+        $this->idConta = $this->defineId($this->idConta);
+    }
 
     /* 
     * valor > 0
@@ -39,7 +46,8 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     // cada conta implementa sua regra de saque, apenas tenho que garantir que este método irá existir em todas as classes filhas de ContaBancariaTc (por mais que na interface esteja que o método tem o modificador de acesso publico, aqui posso alterar para abstrato, não preciso de uma implementação de método de nenhuma das minhas interfaces pois este método é abstrato, o importante é a assinatura do método ser como a da interface (ex: sacar, parâmetros, retorno etc))
     abstract function sacar(float $valor): bool;
 
-    public function desativar(): bool {
+    public function desativar(): bool
+    {
         if ($this->ativa) {
             $this->ativa = false;
             $this->log("Conta desativada.");
@@ -50,17 +58,22 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
         }
     }
 
-    public function getSaldo(): float{
+    public function getSaldo(): float
+    {
         return $this->saldo;
     }
 
-    public function getCliente(): ClienteTc {
+    public function getCliente(): ClienteTc
+    {
         return $this->cliente;
     }
 
-    public function getTipo(): TipoContaTc {
+    public function getTipo(): TipoContaTc
+    {
         return $this->tipoConta;
     }
 
-    public function getId(): 
+    public function getId(): int{
+        return $this->idConta;
+    }
 }
