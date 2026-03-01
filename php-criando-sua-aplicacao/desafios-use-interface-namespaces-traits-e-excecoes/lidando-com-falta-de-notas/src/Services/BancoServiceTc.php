@@ -48,7 +48,6 @@ class BancoServiceTc
     public function listarContas(): void{
         echo "---- Contas registradas ---- \n";
         foreach ($this->contas as $conta) {
-            echo "============ \n";
             echo "Tipo da conta: " . $conta->getTipo() . "\n";
             echo "Nome cliente: " . $conta->getCliente() . "\n";
             echo "Saldo atual: " . $conta->getSaldo() . "\n";

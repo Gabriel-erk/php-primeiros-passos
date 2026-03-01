@@ -29,6 +29,7 @@ echo "=== Saques simples === \n";
 echo $service->sacar($contaCorrente, 5000);
 echo $service->sacar($contaPoupanca, 1000);
 
-echo "Id da conta";
-echo $contaCorrente->getId() . "\n";
-echo $contaPoupanca->getId() . "\n";
+// echo "Id da conta \n";
+// echo $contaCorrente->getId() . "\n";
+// echo $contaPoupanca->getId() . "\n";
+$service->listarContas();

@@ -7,11 +7,10 @@ trait IdentificadorTraitTc {
     public function defineId(): int {
         // para acessar um atributo estático utiliza-se a palavra reservada "self" mais "::"
         self::$idConta++;
-        // retorno com -1 pois quero que o id comece a partir de 0
-        return self::$idConta - 1;
+        return self::$idConta;
     }
 
-    public function getTotalContasInstanciadas(){
-        return $this->contadorTrait;
+    public function getTotalContasInstanciadas(): int{
+        return self::$idConta;
     }
 }

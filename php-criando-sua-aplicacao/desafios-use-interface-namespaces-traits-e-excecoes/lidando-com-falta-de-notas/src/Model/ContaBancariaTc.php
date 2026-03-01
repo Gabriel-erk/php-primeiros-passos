@@ -54,7 +54,7 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
         ) {
             $contaOrigem->saldo -= $valor;
             $contaDestino->saldo += $valor;
-            $this->log("Transferência de saldorealizada.");
+            $this->log("Transferência de saldo realizada.");
             return true;
         } else {
             $this->log("Tentativa de transferência de saldo fracassada.");
