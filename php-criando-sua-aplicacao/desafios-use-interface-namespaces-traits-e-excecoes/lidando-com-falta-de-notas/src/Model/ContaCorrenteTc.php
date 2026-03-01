@@ -14,8 +14,8 @@ class ContaCorrenteTc extends ContaBancariaTc implements OperacaoBancariaTc, Tri
     private const float TAXA = 0.05; 
     private const int LIMITE_EXTRA = 1000;
 
-    public function __construct(ClienteTc $cliente, float $saldo, bool $ativa, TipoContaTc $tipoConta){
-        parent::__construct($cliente, $saldo, $ativa, $tipoConta);
+    public function __construct(ClienteTc $cliente, float $saldo){
+        parent::__construct($cliente, $saldo,TipoContaTc::CORRENTE);
     }
 
     public function calcularTaxa(float $valor): float {

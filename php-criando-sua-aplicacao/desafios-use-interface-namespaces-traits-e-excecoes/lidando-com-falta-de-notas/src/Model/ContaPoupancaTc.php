@@ -8,9 +8,9 @@ use FaltaNotas\Enums\TipoContaTc;
 
 class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
 {
-    public function __construct(ClienteTc $cliente, float $saldo, bool $ativa, TipoContaTc $tipoConta)
+    public function __construct(ClienteTc $cliente, float $saldo)
     {
-        parent::__construct($cliente, $saldo, $ativa, $tipoConta);
+        parent::__construct($cliente, $saldo, TipoContaTc::POUPANCA);
     }
 
     // implementando método de interface

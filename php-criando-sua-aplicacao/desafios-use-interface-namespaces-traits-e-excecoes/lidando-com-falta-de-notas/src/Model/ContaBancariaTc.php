@@ -14,10 +14,12 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     use LoggerTraitTc;
 
     private int $idConta;
+    protected bool $ativa;
     // Classe ClienteTc está no namespace FaltaNotas\Model TAMBÉM então não precisa de use
-    public function __construct(protected ClienteTc $cliente, protected float $saldo, protected bool $ativa, protected TipoContaTc $tipoConta)
+    public function __construct(protected ClienteTc $cliente, protected float $saldo, protected TipoContaTc $tipoConta)
     {
         $this->idConta = $this->defineId($this->idConta);
+        $this->ativa = true;
     }
 
     /* 

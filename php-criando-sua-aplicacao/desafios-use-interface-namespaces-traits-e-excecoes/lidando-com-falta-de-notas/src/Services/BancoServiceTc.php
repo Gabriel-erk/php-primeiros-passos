@@ -1,6 +1,6 @@
 <?php
 
-namespace FaltaNotas\Service;
+namespace FaltaNotas\Services;
 
 use FaltaNotas\Model\ContaBancariaTc;
 
@@ -12,7 +12,7 @@ class BancoServiceTc
 
     public function criarConta(ContaBancariaTc $conta): string {
         $this->contas[] = $conta;
-        return "Conta criada com sucesso";
+        return "Conta criada com sucesso \n";
     }
 
     public function depositar(ContaBancariaTc $conta, float $valor): string
@@ -61,6 +61,6 @@ class BancoServiceTc
         foreach ($this->contas as $conta) {
             $somaDinheiroBanco += $conta->getSaldo();
         }
-        return "Saldo total do banco no dia:" . date('d/m') . " é R\$ $somaDinheiroBanco";
+        return "Saldo total do banco no dia:" . date('d/m') . " é R\$ $somaDinheiroBanco \n";
     }
 }
