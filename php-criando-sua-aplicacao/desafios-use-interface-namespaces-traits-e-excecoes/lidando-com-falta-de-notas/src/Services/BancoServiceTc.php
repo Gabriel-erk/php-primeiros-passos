@@ -39,7 +39,7 @@ class BancoServiceTc
             $contaOrigem->sacar($valor) &&
             $contaDestino->depositar($valor)
         ) {
-            return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo() . " para conta " . $contaDestino->getTipo() . "\n";
+            return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo() . " do cliente " . $contaOrigem->getCliente() . " para conta " . $contaDestino->getTipo() . " do cliente " . $contaDestino->getCliente() . "\n";
         } else {
             return "Tentativa de transferência de valores entre contas fracassada.\n";
         }

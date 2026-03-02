@@ -64,7 +64,10 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
 
     public function desativar(): bool
     {
-        if ($this->ativa) {
+        if (
+            $this->ativa &&
+            $this->saldo == 0 
+        ) {
             $this->ativa = false;
             $this->log("Conta desativada.");
             return true;

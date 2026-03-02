@@ -19,7 +19,7 @@ echo $service->criarConta($contaPoupanca);
 /* 
 * depósitos
 */
-echo "=== Depósitos === \n";
+echo "=== Depósitos simples === \n";
 echo $service->depositar($contaCorrente, 5000);
 echo $service->depositar($contaPoupanca, 1000);
 
@@ -29,7 +29,41 @@ echo "=== Saques simples === \n";
 echo $service->sacar($contaCorrente, 5000);
 echo $service->sacar($contaPoupanca, 1000);
 
+echo "\n";
+echo "=== Depósitos com valores negativos === \n";
+// valor negativo
+echo $service->depositar($contaCorrente, -5);
+echo $service->depositar($contaPoupanca, -10);
+
+echo "\n";
+echo "=== Saques Incorretos (conta corrente) === \n";
+// valor negativo
+echo $service->sacar($contaCorrente, -1);
+// valor que não está em conta
+echo $service->sacar($contaCorrente, 1000000);
+
+echo "\n";
+echo "=== Transferências simples === \n";
+// corrente - poupanca
+echo $service->transferir($contaCorrente, $contaPoupanca, 1000);
+// poupanca - corrente 
+echo $service->transferir($contaPoupanca, $contaCorrente, 3000);
+
+echo "\n";
+echo "=== Transferências inválidas === \n";
+// valor negativo
+echo $service->transferir($contaCorrente, $contaPoupanca, -1);
+// valor maior que o saldo
+echo $service->transferir($contaCorrente, $contaPoupanca, 1000000);
+
+
+echo "\n";
+echo "=== Esvaziamento de conta e desativação === \n";
+while ($contaCorrente->getSaldo() > 0) {
+    $service->sacar()
+}
+
 // echo "Id da conta \n";
 // echo $contaCorrente->getId() . "\n";
 // echo $contaPoupanca->getId() . "\n";
-$service->listarContas();
+// $service->listarContas();
