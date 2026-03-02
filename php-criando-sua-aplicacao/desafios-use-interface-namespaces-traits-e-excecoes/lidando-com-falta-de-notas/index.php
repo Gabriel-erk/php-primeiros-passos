@@ -1,8 +1,10 @@
-<?php 
+<?php
 
 require_once 'autoload.php';
+
 use FaltaNotas\Model\{ClienteTc, ContaCorrenteTc, ContaPoupancaTc};
 use FaltaNotas\Services\BancoServiceTc;
+use FaltaNotas\Enums\TipoContaTc;
 
 // criar 2 clientes
 $clienteUm = new ClienteTc("Gabriel Erick", "999.444.333-98");
@@ -59,9 +61,49 @@ echo $service->transferir($contaCorrente, $contaPoupanca, 1000000);
 
 echo "\n";
 echo "=== Esvaziamento de conta e desativação === \n";
-while ($contaCorrente->getSaldo() > 0) {
-    $service->sacar()
+
+$contas = $service->getContas();
+
+foreach ($contas as $conta) {
+    if (
+        $service->getSaldo($conta) > 0 &&
+        $conta->getTipo() == TipoContaTc::CORRENTE
+    ) {
+        // se entrou aqui é conta corrente, logo, o retorno de getsaldo é o valor do saldo da conta corrente
+        $saldoTotalContaCorrente = $conta->getSaldo();
+        // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
+        $valorAsacar = $saldoTotalContaCorrente / 1.05;
+        echo $service->sacar($conta, $valorAsacar);
+    } else {
+        // se entrou aqui é conta poupança, logo, o retorno de getSaldo vai ser o saldo da conta poupança
+        $valorAsacar = $conta->getSaldo();
+        echo $service->sacar($conta, $valorAsacar);
+    }
+    // quero que essas duas linhas sejam executadas independentemente da conta em questão, este loop percorre um array com 2 posíções (conta corrente e poupança, logo, na primeira vai imprimir as info da corrente e logo após da poupança, ou vice versa, assim não ficando muito poluido os logs)
+    echo $service->getSaldo($conta);
+    echo $service->desativar($conta);
+    echo "\n";
 }
+
+// while ($service->getSaldo($conta) > 0) {
+//     # code...
+// }
+
+// if ($contaCorrente->getSaldo() > 0) {
+//     $saldoTotalContaCorrente = $contaCorrente->getSaldo();
+//     // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
+//     $valorAsacar = $saldoTotalContaCorrente / 1.05;
+//     echo $service->sacar($contaCorrente, $valorAsacar);
+//     echo $service->getSaldo($contaCorrente);
+//     echo $service->desativar($contaCorrente);
+// }
+
+// if ($contaPoupanca->getSaldo() > 0) {
+//     $valorAsacar = $contaPoupanca->getSaldo();
+//     echo $service->sacar($contaPoupanca, $valorAsacar);
+//     echo $service->getSaldo($contaPoupanca);
+//     echo $service->desativar($contaPoupanca);
+// }
 
 // echo "Id da conta \n";
 // echo $contaCorrente->getId() . "\n";

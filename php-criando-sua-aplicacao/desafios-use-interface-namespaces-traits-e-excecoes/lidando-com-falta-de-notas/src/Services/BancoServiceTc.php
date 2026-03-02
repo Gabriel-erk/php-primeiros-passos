@@ -10,9 +10,15 @@ class BancoServiceTc
     /** @var ContaBancariaTc */
     // comentário acima indica pra IDE que a propriedade $contas vai ter apenas objetos do tipo ContaBancariaTc
 
-    public function criarConta(ContaBancariaTc $conta): string {
+    public function criarConta(ContaBancariaTc $conta): string
+    {
         $this->contas[] = $conta;
         return "Conta criada com sucesso \n";
+    }
+
+    public function getSaldo(ContaBancariaTc $conta): string
+    {
+        return "Saldo atual da conta " . $conta->getTipo() . " = R$ " . $conta->getSaldo() . "\n";
     }
 
     public function depositar(ContaBancariaTc $conta, float $valor): string
@@ -45,7 +51,8 @@ class BancoServiceTc
         }
     }
 
-    public function listarContas(): void{
+    public function listarContas(): void
+    {
         echo "---- Contas registradas ---- \n";
         foreach ($this->contas as $conta) {
             echo "Tipo da conta: " . $conta->getTipo() . "\n";
@@ -55,11 +62,27 @@ class BancoServiceTc
         }
     }
 
-    public function totalDinheiroBanco():string{
+    public function totalDinheiroBanco(): string
+    {
         $somaDinheiroBanco = 0;
         foreach ($this->contas as $conta) {
             $somaDinheiroBanco += $conta->getSaldo();
         }
         return "Saldo total do banco no dia:" . date('d/m') . " é R\$ $somaDinheiroBanco \n";
+    }
+
+
+    public function getContas(): array
+    {
+        return $this->contas;
+    }
+
+    public function desativar(ContaBancariaTc $conta): string
+    {
+        if ($conta->desativar()) {
+            return "Conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . " desativada com sucesso. \n";
+        } else {
+            return "Conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . " não foi desativada. \n";
+        }
     }
 }
