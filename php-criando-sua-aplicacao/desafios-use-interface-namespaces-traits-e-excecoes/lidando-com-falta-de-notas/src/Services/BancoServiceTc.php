@@ -18,24 +18,24 @@ class BancoServiceTc
 
     public function getSaldo(ContaBancariaTc $conta): string
     {
-        return "Saldo atual da conta " . $conta->getTipo() . " = R$ " . $conta->getSaldo() . "\n";
+        return "Saldo atual da conta " . $conta->getTipo()->name . " = R$ " . $conta->getSaldo() . "\n";
     }
 
     public function depositar(ContaBancariaTc $conta, float $valor): string
     {
         if ($conta->depositar($valor)) {
-            return "Depósito de: $valor realizado com sucesso na conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . "\n";
+            return "Depósito de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
         } else {
-            return "Tentativa de depósito não efetuada na conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . "\n";
+            return "Tentativa de depósito não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
         }
     }
 
     public function sacar(ContaBancariaTc $conta, float $valor): string
     {
         if ($conta->sacar($valor)) {
-            return "Saque de: $valor realizado com sucesso na conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . "\n";
+            return "Saque de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
         } else {
-            return "Tentativa de saque não efetuada na conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . "\n";
+            return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
         }
     }
 
@@ -45,7 +45,7 @@ class BancoServiceTc
             $contaOrigem->sacar($valor) &&
             $contaDestino->depositar($valor)
         ) {
-            return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo() . " do cliente " . $contaOrigem->getCliente() . " para conta " . $contaDestino->getTipo() . " do cliente " . $contaDestino->getCliente() . "\n";
+            return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo()->name . " do cliente " . $contaOrigem->getCliente() . " para conta " . $contaDestino->getTipo()->name . " do cliente " . $contaDestino->getCliente() . "\n";
         } else {
             return "Tentativa de transferência de valores entre contas fracassada.\n";
         }
@@ -55,7 +55,7 @@ class BancoServiceTc
     {
         echo "---- Contas registradas ---- \n";
         foreach ($this->contas as $conta) {
-            echo "Tipo da conta: " . $conta->getTipo() . "\n";
+            echo "Tipo da conta: " . $conta->getTipo()->name . "\n";
             echo "Nome cliente: " . $conta->getCliente() . "\n";
             echo "Saldo atual: " . $conta->getSaldo() . "\n";
             echo "============ \n";
@@ -80,9 +80,9 @@ class BancoServiceTc
     public function desativar(ContaBancariaTc $conta): string
     {
         if ($conta->desativar()) {
-            return "Conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . " desativada com sucesso. \n";
+            return "Conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . " desativada com sucesso. \n";
         } else {
-            return "Conta " . $conta->getTipo() . " do cliente " . $conta->getCliente() . " não foi desativada. \n";
+            return "Conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . " não foi desativada. \n";
         }
     }
 }

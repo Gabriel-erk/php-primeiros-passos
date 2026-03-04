@@ -65,18 +65,18 @@ echo "=== Esvaziamento de conta e desativação === \n";
 $contas = $service->getContas();
 
 foreach ($contas as $conta) {
+    // o valor aqui vai depender da conta passada (poupança ou corrente)
+    $valorAsacar = $conta->getSaldo();
+    echo $service->getSaldo($conta) . "\n";
     if (
-        $service->getSaldo($conta) > 0 &&
+        $conta->getSaldo() > 0 &&
         $conta->getTipo() == TipoContaTc::CORRENTE
     ) {
-        // se entrou aqui é conta corrente, logo, o retorno de getsaldo é o valor do saldo da conta corrente
-        $saldoTotalContaCorrente = $conta->getSaldo();
+        // echo $service->getSaldo($conta);
         // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
-        $valorAsacar = $saldoTotalContaCorrente / 1.05;
-        echo $service->sacar($conta, $valorAsacar);
+        $valorAsacarContaCorrente = $valorAsacar / 1.05;
+        echo $service->sacar($conta, $valorAsacarContaCorrente);
     } else {
-        // se entrou aqui é conta poupança, logo, o retorno de getSaldo vai ser o saldo da conta poupança
-        $valorAsacar = $conta->getSaldo();
         echo $service->sacar($conta, $valorAsacar);
     }
     // quero que essas duas linhas sejam executadas independentemente da conta em questão, este loop percorre um array com 2 posíções (conta corrente e poupança, logo, na primeira vai imprimir as info da corrente e logo após da poupança, ou vice versa, assim não ficando muito poluido os logs)
@@ -84,6 +84,15 @@ foreach ($contas as $conta) {
     echo $service->desativar($conta);
     echo "\n";
 }
+
+echo "=== Saque e depósito em conta inativa ===";
+// echo var_dump($contaCorrente->getTipo());
+// echo $service->sacar($contaCorrente, 1000);
+// echo $service->sacar($contaCorrente, 1);
+// echo $service->sacar($contaCorrente, 1);
+// echo $service->sacar($contaCorrente, 500);
+// echo $service->getSaldo($contaCorrente);
+// echo $service->getSaldo($contaPoupanca);
 
 // while ($service->getSaldo($conta) > 0) {
 //     # code...

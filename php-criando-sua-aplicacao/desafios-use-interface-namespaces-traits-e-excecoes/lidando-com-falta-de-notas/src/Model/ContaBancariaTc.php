@@ -87,9 +87,9 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
         return $this->cliente->nome;
     }
 
-    public function getTipo(): string
+    public function getTipo(): TipoContaTc
     {
-        return $this->tipoConta->name;
+        return $this->tipoConta;
     }
 
     public function getId(): int{
