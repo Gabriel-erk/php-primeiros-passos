@@ -76,6 +76,8 @@ foreach ($contas as $conta) {
         // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
         $valorAsacarContaCorrente = $valorAsacar / 1.05;
         echo $service->sacar($conta, $valorAsacarContaCorrente);
+        echo "=== Teste saque por limite extra === \n";
+        echo $service->sacar($conta, 1000);
     } else {
         echo $service->sacar($conta, $valorAsacar);
     }
@@ -85,14 +87,12 @@ foreach ($contas as $conta) {
     echo "\n";
 }
 
-echo "=== Saque e depósito em conta inativa ===";
-// echo var_dump($contaCorrente->getTipo());
-// echo $service->sacar($contaCorrente, 1000);
-// echo $service->sacar($contaCorrente, 1);
-// echo $service->sacar($contaCorrente, 1);
-// echo $service->sacar($contaCorrente, 500);
-// echo $service->getSaldo($contaCorrente);
-// echo $service->getSaldo($contaPoupanca);
+echo "=== Saque e depósito em conta inativa === \n";
+foreach ($contas as $conta) {
+    echo $service->sacar($conta, 1000);
+    echo $service->getSaldo($conta);
+}
+
 
 // while ($service->getSaldo($conta) > 0) {
 //     # code...
