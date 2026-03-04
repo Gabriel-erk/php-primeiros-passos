@@ -36,6 +36,7 @@ spl_autoload_register(function (string $className) {
     * normalmente apenas UM autolaod é feito, mas caso precise de mais, a implementação já está correta para recebê-lo
     * também é importante garantir que nosso autoload não gere nenhum erro pois assim estamos alinhados com as boas práticas da PSR (PHP Standardard Recommendations 4) onde diz que nosso autoload não deve gerar erros
     */
+    // var_dump($caminhoCompleto);
     if (file_exists($caminhoCompleto)) {
         require_once $caminhoCompleto;
     }
