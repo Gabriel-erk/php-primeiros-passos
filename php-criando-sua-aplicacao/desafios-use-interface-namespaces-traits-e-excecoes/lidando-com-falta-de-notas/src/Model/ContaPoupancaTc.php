@@ -5,6 +5,11 @@ namespace FaltaNotas\Model;
 // a não ser que façamos a solicitação direta dele, utilizando seu caminho (ou namespace próprio), fazendo com que seja finalmente encontrado e possamos prosseguir normalmente com a aplicação 
 use FaltaNotas\Contracts\OperacaoBancariaTc;
 use FaltaNotas\Enums\TipoContaTc;
+use FaltaNotas\Exceptions\{
+    ContaInativaException,
+    SaldoInsuficienteException,
+    ValorInvalidoExceptionTc
+};
 
 class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
 {
@@ -13,17 +18,25 @@ class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
         parent::__construct($cliente, $saldo, TipoContaTc::POUPANCA);
     }
 
+
+
     // implementando método de interface
     public function sacar(float $valor): bool
     {
+
+        if (!$this->ativa) {
+            throw new ContaInativaException();
+        }
+
+        if ($valor > $this->saldo) {
+            throw new SaldoInsuficienteException();
+        }
         /* 
         * sem taxa e limite extra
         * só pode sacar até o saldo
         */
         if (
-            $valor <= $this->saldo &&
-            $valor > 0 &&
-            $this->ativa == true
+            $valor > 0 
         ) {
             $this->saldo -= $valor;
             $this->log("Saque realizado.");

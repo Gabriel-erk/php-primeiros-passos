@@ -32,22 +32,30 @@ class BancoServiceTc
 
     public function sacar(ContaBancariaTc $conta, float $valor): string
     {
-        if ($conta->sacar($valor)) {
-            return "Saque de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
-        } else {
-            return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+        try {
+            if ($conta->sacar($valor)) {
+                return "Saque de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+            } else {
+                return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+            }
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 
     public function transferir(ContaBancariaTc $contaOrigem, ContaBancariaTc $contaDestino, float $valor): string
     {
-        if (
-            $contaOrigem->sacar($valor) &&
-            $contaDestino->depositar($valor)
-        ) {
-            return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo()->name . " do cliente " . $contaOrigem->getCliente() . " para conta " . $contaDestino->getTipo()->name . " do cliente " . $contaDestino->getCliente() . "\n";
-        } else {
-            return "Tentativa de transferência de valores entre contas fracassada.\n";
+        try {
+            if (
+                $contaOrigem->sacar($valor) &&
+                $contaDestino->depositar($valor)
+            ) {
+                return "Transferência de: $valor realizada com sucesso de conta " . $contaOrigem->getTipo()->name . " do cliente " . $contaOrigem->getCliente() . " para conta " . $contaDestino->getTipo()->name . " do cliente " . $contaDestino->getCliente() . "\n";
+            } else {
+                return "Tentativa de transferência de valores entre contas fracassada.\n";
+            }
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 

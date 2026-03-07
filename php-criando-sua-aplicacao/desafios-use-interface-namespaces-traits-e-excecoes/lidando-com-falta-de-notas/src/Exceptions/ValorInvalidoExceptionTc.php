@@ -1,10 +1,13 @@
-<?php 
+<?php
 
-namespace FaltaNotas\Exception;
+namespace FaltaNotas\Exceptions;
 
 use Exception;
 
-class ValorInvalidoExceptionTc extends Exception 
+class ValorInvalidoExceptionTc extends Exception
 {
-    
+    public function __construct()
+    {
+        parent::__construct("Valor inválido para saque.");
+    }
 }
