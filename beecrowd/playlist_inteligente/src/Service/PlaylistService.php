@@ -26,18 +26,19 @@ class PlaylistService
         if ($playlist->removerMusica($nomeMusica)) {
             return "Música: " . $nomeMusica . " removida da playlist: " . $playlist->nomePlaylist . " com sucesso \n";
         } else {
-            return "Música não foi encontrada. \n";
+            return "false = Música não foi encontrada. \n";
         }
     }
 
     public function listarMusicas(Playlist $playlist): void
     {
         $lista_musicas = $playlist->getMusicas();
-        $contador = 0;
+        $contadorMusicas = 1;
 
         if ($lista_musicas != null) {
             foreach ($lista_musicas as $musica) {
-                echo "Música #00" . $contador . " - " . $musica->nomeMusica . "\n";
+                echo "Música #00" . $contadorMusicas . " - " . $musica->nomeMusica . "\n";
+                $contadorMusicas += 1;
             }
         } else {
             echo "Playlist não possui músicas \n";
@@ -46,7 +47,7 @@ class PlaylistService
 
     public function tempoTotalPlaylist(Playlist $playlist): string
     {
-        return "A Playlist " . $playlist->nomePlaylist . " possui " . $playlist->tempoTotalPlaylist() . " minutos de duração. \n";
+        return "A Playlist: " . $playlist->nomePlaylist . " possui " . $playlist->tempoTotalPlaylist() . " minutos de duração. \n";
     }
 
     public function tempoPorGenero(Playlist $playlist): void
