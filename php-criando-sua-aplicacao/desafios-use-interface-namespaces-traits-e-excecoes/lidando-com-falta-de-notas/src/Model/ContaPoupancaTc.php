@@ -24,13 +24,9 @@ class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
     public function sacar(float $valor): bool
     {
 
-        if (!$this->ativa) {
-            throw new ContaInativaExceptionTc();
-        }
+        $this->contaInativaException($this->ativa);
+        $this->saldoInsuficienteException($valor, $this->saldo);
 
-        if ($valor > $this->saldo) {
-            throw new SaldoInsuficienteExceptionTc();
-        }
         /* 
         * sem taxa e limite extra
         * só pode sacar até o saldo

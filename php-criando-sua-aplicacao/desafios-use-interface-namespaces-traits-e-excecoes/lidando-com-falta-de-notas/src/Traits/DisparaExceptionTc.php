@@ -21,4 +21,10 @@ trait DisparaExceptionTc
             throw new SaldoInsuficienteExceptionTc();
         }
     }
+
+    public function valorInvalidoException(float $valor): void {
+        if ($valor < 0) {
+            throw new ValorInvalidoExceptionTc();
+        }
+    }
 }

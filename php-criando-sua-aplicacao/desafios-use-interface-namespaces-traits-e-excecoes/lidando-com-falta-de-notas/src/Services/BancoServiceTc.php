@@ -30,7 +30,7 @@ class BancoServiceTc
                 return "Tentativa de depósito não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
             }
         } catch (\Throwable $th) {
-            return "Erro/Exception depósito: " . $th->getMessage();
+            return "Erro/Exception depósito: " . $th->getMessage() . "\n";
         }
     }
 

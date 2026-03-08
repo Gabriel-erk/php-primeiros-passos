@@ -8,6 +8,6 @@ class ValorInvalidoExceptionTc extends Exception
 {
     public function __construct()
     {
-        parent::__construct("Valor inválido para saque.");
+        parent::__construct("Valor inválido para esta operação.");
     }
 }
