@@ -41,21 +41,21 @@ class ContaCorrenteTc extends ContaBancariaTc implements OperacaoBancariaTc, Tri
 
         $this->contaInativaException($this->ativa);
 
-       $this->saldoInsuficienteException($valor, $saquePermitido);
+        $this->saldoInsuficienteException($valor, $saquePermitido);
+
+        $this->valorInvalidoException($valor);
 
         // não preciso verificar se o $valor é menor ou igual ao $saquePermitido, pois no if acima verifico se ele é maior, caso for, dispara uma exception e para o sistema, caso não, o saldo é menor ou igual ao $saquePermitido, mantendo o fluxo normal e sacando apenas o valor correto
         if (
-            $valor > 0 &&
-            $this->saldo > 0 
+            $this->saldo > 0
         ) {
             $this->saldo -= $valorAdescontar;
             $this->log("Saque realizado.");
             return true;
         } else if (
             $valor <= self::$limiteExtra &&
-            $valor > 0 &&
             self::$limiteExtra > 0
-         ) {
+        ) {
             $this->log("Saque por limite extra realizado.");
             self::$limiteExtra -= $valor;
             return true;

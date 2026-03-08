@@ -32,24 +32,18 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     public function depositar(float $valor): bool
     {
         $this->contaInativaException($this->ativa);
-        $this->valorInvalidoException($valor);
-
-        $this->saldo += $valor;
-        // acessamos o método log que pertence a nossa trait com this, não é necessário instância nem nada
-        $this->log("Depósito realizado.");
-        return true;
-
-        // if (
-        //     $valor > 0
-        // ) {
-        //     $this->saldo += $valor;
-        //     // acessamos o método log que pertence a nossa trait com this, não é necessário instância nem nada
-        //     $this->log("Depósito realizado.");
-        //     return true;
-        // } else {
-        //     $this->log("Tentativa de depósito fracassada.");
-        //     return false;
-        // }
+        // tentei aplicar o método de valorInvalido, mas se fizesse isso, não teria meu else para registrar o log de fracasso
+        if (
+            $valor > 0
+        ) {
+            $this->saldo += $valor;
+            // acessamos o método log que pertence a nossa trait com this, não é necessário instância nem nada
+            $this->log("Depósito realizado.");
+            return true;
+        } else {
+            $this->log("Tentativa de depósito fracassada.");
+            return false;
+        }
     }
     // cada conta implementa sua regra de saque, apenas tenho que garantir que este método irá existir em todas as classes filhas de ContaBancariaTc (por mais que na interface esteja que o método tem o modificador de acesso publico, aqui posso alterar para abstrato, não preciso de uma implementação de método de nenhuma das minhas interfaces pois este método é abstrato, o importante é a assinatura do método ser como a da interface (ex: sacar, parâmetros, retorno etc))
     abstract function sacar(float $valor): bool;
