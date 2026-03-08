@@ -8,9 +8,10 @@ use FaltaNotas\Contracts\{
 };
 use FaltaNotas\Enums\TipoContaTc;
 use FaltaNotas\Traits\LoggerTraitTc;
-use FaltaNotas\Exceptions\{
-    ContaInativaException,
-    SaldoInsuficienteException,
+// nome do arquivo precisa ser igual ao nome da classe, no meu caso estava o arquivo: ContaInativaExceptionTc mas o nome da classe ContaInativaException, o que fazia com que o autoload nao encontrasse o arquivo de jeito nenhum, pois o arqivo ere ContaInativaExceptionTc e ele estava procutando por ContaInativaException (e assim com os outros arquivos também)
+use FaltaNotas\Exception\{
+    ContaInativaExceptionTc,
+    SaldoInsuficienteExceptionTc,
     ValorInvalidoExceptionTc
 };
 
@@ -39,11 +40,11 @@ class ContaCorrenteTc extends ContaBancariaTc implements OperacaoBancariaTc, Tri
         $valorAdescontar = $valor + $taxaCalculada;
 
         if (!$this->ativa) {
-            throw new ContaInativaException();
+            throw new ContaInativaExceptionTc();
         }
 
         if ($valor > $saquePermitido) {
-            throw new SaldoInsuficienteException();
+            throw new SaldoInsuficienteExceptionTc();
         }
 
         // não preciso verificar se o $valor é menor ou igual ao $saquePermitido, pois no if acima verifico se ele é maior, caso for, dispara uma exception e para o sistema, caso não, o saldo é menor ou igual ao $saquePermitido, mantendo o fluxo normal e sacando apenas o valor correto

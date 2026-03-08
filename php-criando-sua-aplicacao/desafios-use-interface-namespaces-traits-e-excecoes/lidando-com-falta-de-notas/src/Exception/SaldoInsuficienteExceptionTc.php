@@ -1,10 +1,10 @@
 <?php 
 
-namespace FaltaNotas\Exceptions;
+namespace FaltaNotas\Exception;
 
 use Exception;
 
-class SaldoInsuficienteException extends Exception 
+class SaldoInsuficienteExceptionTc extends Exception 
 {
     public function __construct(){
         return parent::__construct("Saldo insuficiente para saque.");

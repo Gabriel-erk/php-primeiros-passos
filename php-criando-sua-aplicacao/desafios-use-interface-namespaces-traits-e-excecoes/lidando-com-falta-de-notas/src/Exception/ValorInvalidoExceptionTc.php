@@ -1,6 +1,6 @@
 <?php
 
-namespace FaltaNotas\Exceptions;
+namespace FaltaNotas\Exception;
 
 use Exception;
 

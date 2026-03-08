@@ -39,7 +39,7 @@ class BancoServiceTc
                 return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
             }
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            return "Erro/Exception: " . $th->getMessage() . "\n";
         }
     }
 
@@ -55,7 +55,7 @@ class BancoServiceTc
                 return "Tentativa de transferência de valores entre contas fracassada.\n";
             }
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            return "Erro/Exception: " . $th->getMessage();
         }
     }
 

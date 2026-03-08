@@ -5,9 +5,9 @@ namespace FaltaNotas\Model;
 // a não ser que façamos a solicitação direta dele, utilizando seu caminho (ou namespace próprio), fazendo com que seja finalmente encontrado e possamos prosseguir normalmente com a aplicação 
 use FaltaNotas\Contracts\OperacaoBancariaTc;
 use FaltaNotas\Enums\TipoContaTc;
-use FaltaNotas\Exceptions\{
-    ContaInativaException,
-    SaldoInsuficienteException,
+use FaltaNotas\Exception\{
+    ContaInativaExceptionTc,
+    SaldoInsuficienteExceptionTc,
     ValorInvalidoExceptionTc
 };
 
@@ -25,11 +25,11 @@ class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
     {
 
         if (!$this->ativa) {
-            throw new ContaInativaException();
+            throw new ContaInativaExceptionTc();
         }
 
         if ($valor > $this->saldo) {
-            throw new SaldoInsuficienteException();
+            throw new SaldoInsuficienteExceptionTc();
         }
         /* 
         * sem taxa e limite extra

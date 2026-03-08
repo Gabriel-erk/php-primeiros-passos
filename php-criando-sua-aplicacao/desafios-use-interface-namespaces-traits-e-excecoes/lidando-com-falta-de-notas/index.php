@@ -1,13 +1,10 @@
 <?php
 
-require_once 'autoload.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use FaltaNotas\Model\{ClienteTc, ContaCorrenteTc, ContaPoupancaTc};
 use FaltaNotas\Services\BancoServiceTc;
 use FaltaNotas\Enums\TipoContaTc;
-use FaltaNotas\Exceptions\{
-    ContaInativaException, SaldoInsuficienteException, ValorInvalidoExceptionTc
-};
 
 // criar 2 clientes
 $clienteUm = new ClienteTc("Gabriel Erick", "999.444.333-98");
