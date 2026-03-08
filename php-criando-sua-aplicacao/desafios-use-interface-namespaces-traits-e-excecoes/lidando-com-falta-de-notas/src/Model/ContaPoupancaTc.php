@@ -26,7 +26,7 @@ class ContaPoupancaTc extends ContaBancariaTc implements OperacaoBancariaTc
 
         $this->contaInativaException($this->ativa);
         $this->saldoInsuficienteException($valor, $this->saldo);
-
+        // se aplicasse aqui a verificação de saldo positivo também me daria o mesmo erro de não conseguir registrar o log de tentativa fracassada
         /* 
         * sem taxa e limite extra
         * só pode sacar até o saldo

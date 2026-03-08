@@ -18,6 +18,13 @@ echo $service->criarConta($contaCorrente);
 $contaPoupanca = new ContaPoupancaTc($clienteDois, 25000);
 echo $service->criarConta($contaPoupanca);
 
+echo "\n";
+
+echo "=== Total dinheiro do banco ===\n";
+echo $service->totalDinheiroBanco();
+
+echo "\n";
+
 /* 
 * depósitos
 */
@@ -98,29 +105,16 @@ foreach ($contas as $conta) {
     echo $service->depositar($conta, 1000);
     echo $service->getSaldo($conta);;
 }
+echo "\n";
 
+// criando conta teste para ver questão de id e etc
+$clienteTeste = new ClienteTc("Teste", "987.134.123-87");
+$contaTeste = new ContaPoupancaTc($clienteTeste, 10000);
+echo $service->criarConta($contaTeste);
+// listando contas
+$service->listarContas();
 
-// while ($service->getSaldo($conta) > 0) {
-//     # code...
-// }
+echo "\n";
 
-// if ($contaCorrente->getSaldo() > 0) {
-//     $saldoTotalContaCorrente = $contaCorrente->getSaldo();
-//     // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
-//     $valorAsacar = $saldoTotalContaCorrente / 1.05;
-//     echo $service->sacar($contaCorrente, $valorAsacar);
-//     echo $service->getSaldo($contaCorrente);
-//     echo $service->desativar($contaCorrente);
-// }
-
-// if ($contaPoupanca->getSaldo() > 0) {
-//     $valorAsacar = $contaPoupanca->getSaldo();
-//     echo $service->sacar($contaPoupanca, $valorAsacar);
-//     echo $service->getSaldo($contaPoupanca);
-//     echo $service->desativar($contaPoupanca);
-// }
-
-// echo "Id da conta \n";
-// echo $contaCorrente->getId() . "\n";
-// echo $contaPoupanca->getId() . "\n";
-// $service->listarContas();
+echo "=== Total dinheiro do banco ===\n";
+echo $service->totalDinheiroBanco();

@@ -78,6 +78,10 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
         return $this->tipoConta;
     }
 
+    public function getStatus(): bool {
+        return $this->ativa;
+    }
+
     public function getId(): int
     {
         return $this->id;

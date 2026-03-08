@@ -65,11 +65,17 @@ class BancoServiceTc
 
     public function listarContas(): void
     {
-        echo "---- Contas registradas ---- \n";
+        echo "=== Listando contas === \n";
         foreach ($this->contas as $conta) {
             echo "Tipo da conta: " . $conta->getTipo()->name . "\n";
             echo "Nome cliente: " . $conta->getCliente() . "\n";
             echo "Saldo atual: " . $conta->getSaldo() . "\n";
+            echo "ID: " . $conta->getId() . "\n";
+            if ($conta->getStatus()) {
+                echo "Status: ATIVA \n";
+            } else {
+                echo "Status: DESATIVADA \n";
+            }
             echo "============ \n";
         }
     }
@@ -80,7 +86,7 @@ class BancoServiceTc
         foreach ($this->contas as $conta) {
             $somaDinheiroBanco += $conta->getSaldo();
         }
-        return "Saldo total do banco no dia:" . date('d/m') . " é R\$ $somaDinheiroBanco \n";
+        return "Saldo total do banco no dia: " . date('d/m') . " é R\$ $somaDinheiroBanco \n";
     }
 
 
