@@ -43,7 +43,7 @@ class BancoServiceTc
                 return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
             }
         } catch (\Throwable $th) {
-            return "Erro/Exception saque: " . $th->getMessage();
+            return "Erro/Exception saque: " . $th->getMessage() . "\n";
         }
     }
 

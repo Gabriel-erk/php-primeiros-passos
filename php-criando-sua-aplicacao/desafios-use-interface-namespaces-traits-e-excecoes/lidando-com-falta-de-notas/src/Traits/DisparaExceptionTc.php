@@ -15,4 +15,10 @@ trait DisparaExceptionTc
             throw new ContaInativaExceptionTc();
         }
     }
+
+    public function saldoInsuficienteException(float $valorSaque, float $saquePermitido): void {
+        if ($valorSaque > $saquePermitido) {
+            throw new SaldoInsuficienteExceptionTc();
+        }
+    }
 }

@@ -45,6 +45,12 @@ echo $service->sacar($contaCorrente, -1);
 echo $service->sacar($contaCorrente, 1000000);
 
 echo "\n";
+
+echo "=== Saques Incorretos (conta poupança) === \n";
+echo $service->sacar($contaPoupanca, -1);
+echo $service->sacar($contaPoupanca, 1000000);
+
+echo "\n";
 echo "=== Transferências simples === \n";
 // corrente - poupanca
 echo $service->transferir($contaCorrente, $contaPoupanca, 1000);
@@ -58,7 +64,6 @@ echo $service->transferir($contaCorrente, $contaPoupanca, -1);
 // valor maior que o saldo
 echo $service->transferir($contaCorrente, $contaPoupanca, 1000000);
 
-
 echo "\n";
 echo "=== Esvaziamento de conta e desativação === \n";
 
@@ -67,7 +72,6 @@ $contas = $service->getContas();
 foreach ($contas as $conta) {
     // o valor aqui vai depender da conta passada (poupança ou corrente)
     $valorAsacar = $conta->getSaldo();
-    echo $service->getSaldo($conta) . "\n";
     if (
         $conta->getSaldo() > 0 &&
         $conta->getTipo() == TipoContaTc::CORRENTE
@@ -76,6 +80,7 @@ foreach ($contas as $conta) {
         // qual o valor que, quando acrescentado a taxa (de 5%) terei o valor total em conta? r: este valor é 5% a menos do saldo atual, reduzindo 5% dele agora, quando disparar o método, aumentará 5% e assim consigo retirar todo o SALDO, por mais que eu possa chamar saque devido ao limite extra, no caso atual eu não chamarei
         $valorAsacarContaCorrente = $valorAsacar / 1.05;
         echo $service->sacar($conta, $valorAsacarContaCorrente);
+        echo "\n";
         echo "=== Teste saque por limite extra === \n";
         echo $service->sacar($conta, 1000);
     } else {
