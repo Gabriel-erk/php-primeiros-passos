@@ -5,13 +5,20 @@ namespace FaltaNotas\Model;
 use FaltaNotas\Contracts\{LogavelTc, OperacaoBancariaTc};
 // namespace dos enums
 use FaltaNotas\Enums\TipoContaTc;
-use FaltaNotas\Traits\{IdentificadorTraitTc, LoggerTraitTc};
+use FaltaNotas\Traits\{IdentificadorTraitTc, LoggerTraitTc, DisparaExceptionTc};
+// namespace exceptions
+use FaltaNotas\Exception\{
+    ContaInativaException,
+    SaldoInsuficienteExceptionTc,
+    ValorInvalidoExceptionTc
+};
 
 abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
 {
     // usando as traits (é necessário colocar o namespace completo e preciso chamar dentro do corpo da classe, como boa prática, antes do construtor e definição de propriedades)
     use IdentificadorTraitTc;
     use LoggerTraitTc;
+    use DisparaExceptionTc;
 
     private int $id;
     protected bool $ativa;
@@ -30,6 +37,8 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     */
     public function depositar(float $valor): bool
     {
+        $this->contaInativaException($this->ativa);
+
         if (
             $valor > 0 &&
             $this->ativa == true
@@ -45,22 +54,6 @@ abstract class ContaBancariaTc implements OperacaoBancariaTc, LogavelTc
     }
     // cada conta implementa sua regra de saque, apenas tenho que garantir que este método irá existir em todas as classes filhas de ContaBancariaTc (por mais que na interface esteja que o método tem o modificador de acesso publico, aqui posso alterar para abstrato, não preciso de uma implementação de método de nenhuma das minhas interfaces pois este método é abstrato, o importante é a assinatura do método ser como a da interface (ex: sacar, parâmetros, retorno etc))
     abstract function sacar(float $valor): bool;
-
-    public function transferir(ContaBancariaTc $contaOrigem, ContaBancariaTc $contaDestino, float $valor): bool{
-        if (
-            $valor > 0 &&
-            $contaOrigem->ativa == true &&
-            $contaDestino->ativa == true
-        ) {
-            $contaOrigem->saldo -= $valor;
-            $contaDestino->saldo += $valor;
-            $this->log("Transferência de saldo realizada.");
-            return true;
-        } else {
-            $this->log("Tentativa de transferência de saldo fracassada.");
-            return false;
-        }
-    }
 
     public function desativar(): bool
     {

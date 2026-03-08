@@ -8,7 +8,7 @@ use FaltaNotas\Contracts\{
 };
 use FaltaNotas\Enums\TipoContaTc;
 use FaltaNotas\Traits\LoggerTraitTc;
-// nome do arquivo precisa ser igual ao nome da classe, no meu caso estava o arquivo: ContaInativaExceptionTc mas o nome da classe ContaInativaException, o que fazia com que o autoload nao encontrasse o arquivo de jeito nenhum, pois o arqivo ere ContaInativaExceptionTc e ele estava procutando por ContaInativaException (e assim com os outros arquivos também)
+// nome do arquivo precisa ser igual ao nome da classe, no meu caso estava o arquivo: ContaInativaExceptionTc mas o nome da classe ContaInativaException, o que fazia com que o autoload nao encontrasse o arquivo de jeito nenhum, pois o arqivo ere ContaInativaExceptionTc e ele estava procutando por ContaInativaException (e assim com os outros arquivos também, namespace precisa bater com o nome original do arquivo) 
 use FaltaNotas\Exception\{
     ContaInativaExceptionTc,
     SaldoInsuficienteExceptionTc,

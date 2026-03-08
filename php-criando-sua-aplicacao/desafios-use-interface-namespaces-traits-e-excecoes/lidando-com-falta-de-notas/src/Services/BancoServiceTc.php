@@ -23,10 +23,14 @@ class BancoServiceTc
 
     public function depositar(ContaBancariaTc $conta, float $valor): string
     {
-        if ($conta->depositar($valor)) {
-            return "Depósito de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
-        } else {
-            return "Tentativa de depósito não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+        try {
+            if ($conta->depositar($valor)) {
+                return "Depósito de: $valor realizado com sucesso na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+            } else {
+                return "Tentativa de depósito não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
+            }
+        } catch (\Throwable $th) {
+            return "Erro/Exception depósito: " . $th->getMessage();
         }
     }
 
@@ -39,7 +43,7 @@ class BancoServiceTc
                 return "Tentativa de saque não efetuada na conta " . $conta->getTipo()->name . " do cliente " . $conta->getCliente() . "\n";
             }
         } catch (\Throwable $th) {
-            return "Erro/Exception: " . $th->getMessage() . "\n";
+            return "Erro/Exception saque: " . $th->getMessage();
         }
     }
 

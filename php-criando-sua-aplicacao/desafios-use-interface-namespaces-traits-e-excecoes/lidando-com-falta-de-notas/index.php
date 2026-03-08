@@ -90,7 +90,9 @@ foreach ($contas as $conta) {
 echo "=== Saque e depósito em conta inativa === \n";
 foreach ($contas as $conta) {
     echo $service->sacar($conta, 1000);
+    echo $service->depositar($conta, 1000);
     echo $service->getSaldo($conta);
+    echo "\n";
 }
 
 
