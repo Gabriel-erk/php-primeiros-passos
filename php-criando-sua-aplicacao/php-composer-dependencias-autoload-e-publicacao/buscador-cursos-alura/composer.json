@@ -1,0 +1,12 @@
+{
+    "name": "gabriel-erk/buscador-cursos",
+    "description": "Projeto que busca os cursos no dite da Alura",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Gabriel Erick",
+            "email": "gabrielmmve13@gmail.com"
+        }
+    ],
+    "require": {}
+}
