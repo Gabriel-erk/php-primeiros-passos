@@ -8,5 +8,8 @@
             "email": "gabrielmmve13@gmail.com"
         }
     ],
-    "require": {}
-}
+    "require": {
+        "guzzlehttp/guzzle": "^7.10",
+        "symfony/dom-crawler": "^8.0"
+    }
+} 
