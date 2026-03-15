@@ -3,7 +3,7 @@
         'name' => 'gabriel-erk/buscador-cursos',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c71a946403611d0e0da6954ac68b4260044e9dbf',
+        'reference' => '4e8161ba70183d688cfd913933d51ec4da37faa6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'gabriel-erk/buscador-cursos' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c71a946403611d0e0da6954ac68b4260044e9dbf',
+            'reference' => '4e8161ba70183d688cfd913933d51ec4da37faa6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
